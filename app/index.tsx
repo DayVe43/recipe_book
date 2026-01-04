@@ -1,6 +1,8 @@
+import { useHabits } from "@/hooks/useHabits";
 import { Ionicons } from "@expo/vector-icons";
+import { router, useFocusEffect } from "expo-router";
 import { StatusBar } from "expo-status-bar";
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import { FlatList, Keyboard, Modal, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -10,21 +12,22 @@ export default function Index() {
   const [titleText, setTitleText] = useState("");
   const [descriptionText, setDescriptionText] = useState("");
   const [frequencyText, setFrequencyText] = useState("");
-  const [habits, setHabits] = useState<Array<{id:number, title:string, description:string, frequency:string, streak:number}>>([]);
 
-  var habitData = habits;
+  const { habits, isLoading, addHabit, reloadHabits } = useHabits();
 
-  const addHabit = (title:string, description:string, frequency:string) => {
-      const newHabit = {
-        id: habitData.length + 1,
-        title: title,
-        description: description,
-        frequency: frequency,
-        streak: 0,
-      };
-      habitData.push(newHabit);
-      setHabits(habitData);
-  };
+  useFocusEffect(
+  useCallback(() => {
+    reloadHabits();
+  }, [reloadHabits])
+);
+
+  if (isLoading) {
+    return (
+      <SafeAreaView style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <Text>Loading...</Text>
+      </SafeAreaView>
+    );
+  }
 
   return (
     <SafeAreaView
@@ -51,12 +54,16 @@ export default function Index() {
         </SafeAreaView>
       </Modal>
       <FlatList data={habits} keyExtractor={(item) => item.id.toString()} renderItem={({item}) => (
+        <TouchableOpacity onPress={() => router.navigate({
+            pathname: '/habit/[id]',
+            params: { id: item.id }
+          })
+        }>
         <View style={{marginBottom: 32, backgroundColor: '#fff', padding: 16, borderRadius: 8}}>
           <Text>{item.title}</Text>
-          <Text>{item.description}</Text>
-          <Text>{item.frequency}</Text>
           <Text>{item.streak}</Text>
         </View>
+        </TouchableOpacity>
       )}/>
       <TouchableOpacity onPress={() => setModalVisible(true)}>
         <Ionicons name="add-circle" size={64} color="blue" />
