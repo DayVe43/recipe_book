@@ -3,7 +3,7 @@ import { Habit } from "@/models/Habit";
 import { router, useLocalSearchParams } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import React, { useEffect, useState } from "react";
-import { Text, TouchableOpacity, View } from "react-native";
+import { Alert, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 
@@ -36,6 +36,24 @@ export default function Index() {
     )
   }
 
+  const deleteAlet = () => {
+    Alert.alert(
+      "Delete Habit",
+      "Are you sure you want to delete this habit?",
+      [
+        {
+          text: "Cancel",
+          style: "cancel"
+        },
+        {
+          text: "Delete",
+          style: "destructive",
+          onPress: () => { router.dismissTo('/'); removeHabit(item.id); }
+        }
+      ]
+    );
+  };
+
   return (
     <SafeAreaView
       style={{
@@ -51,7 +69,7 @@ export default function Index() {
           <Text>{item.frequency}</Text>
           <Text>{item.streak}</Text>
         </View>
-        <TouchableOpacity onPress={() => {router.dismissTo('/'); removeHabit(item.id);}}>
+        <TouchableOpacity onPress={() => deleteAlet()}>
           <Text>Delete Habit</Text>
         </TouchableOpacity>
     </SafeAreaView>
