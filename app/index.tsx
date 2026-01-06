@@ -1,4 +1,4 @@
-import { useHabits } from "@/hooks/useHabits";
+import { useRecipes } from "@/hooks/useRecipes";
 import { Ionicons } from "@expo/vector-icons";
 import { router, useFocusEffect } from "expo-router";
 import { StatusBar } from "expo-status-bar";
@@ -13,12 +13,12 @@ export default function Index() {
   const [descriptionText, setDescriptionText] = useState("");
   const [frequencyText, setFrequencyText] = useState("");
 
-  const { habits, isLoading, addHabit, reloadHabits } = useHabits();
+  const { recipes, isLoading, addRecipe, reloadRecipes } = useRecipes();
 
   useFocusEffect(
   useCallback(() => {
-    reloadHabits();
-  }, [reloadHabits])
+    reloadRecipes();
+  }, [reloadRecipes])
 );
 
   if (isLoading) {
@@ -44,16 +44,14 @@ export default function Index() {
               <Ionicons name="close" size={32} color="black" />
             </TouchableOpacity>
           </View>
-          <Text>New Habit</Text>
+          <Text>New Recipe</Text>
           <TextInput placeholder="Title" value={titleText} onChangeText={(text) => setTitleText(text)}/>
-          <TextInput placeholder="Description" value={descriptionText} onChangeText={(text) => setDescriptionText(text)} />
-          <TextInput placeholder="Frequency" value={frequencyText} onChangeText={(text) => setFrequencyText(text)}/>
-          <TouchableOpacity onPress={() => { addHabit(titleText, descriptionText, frequencyText); setModalVisible(false); setTitleText(""); setDescriptionText(""); setFrequencyText(""); Keyboard.dismiss(); }}>
-            <Text>Add Habit</Text>
+          <TouchableOpacity onPress={() => { addRecipe(titleText, [], []); setModalVisible(false); setTitleText(""); setDescriptionText(""); setFrequencyText(""); Keyboard.dismiss(); }}>
+            <Text>Add Recipe</Text>
           </TouchableOpacity>
         </SafeAreaView>
       </Modal>
-      <FlatList data={habits} keyExtractor={(item) => item.id.toString()} renderItem={({item}) => (
+      <FlatList data={recipes} keyExtractor={(item) => item.id.toString()} renderItem={({item}) => (
         <TouchableOpacity onPress={() => router.navigate({
             pathname: '/habit/[id]',
             params: { id: item.id }
@@ -61,7 +59,6 @@ export default function Index() {
         }>
         <View style={{marginBottom: 32, backgroundColor: '#fff', padding: 16, borderRadius: 8}}>
           <Text>{item.title}</Text>
-          <Text>{item.streak}</Text>
         </View>
         </TouchableOpacity>
       )}/>
