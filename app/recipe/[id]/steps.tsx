@@ -1,17 +1,17 @@
 import { useRecipes } from "@/hooks/useRecipes";
 import { Recipe } from "@/models/Recipe";
-import { router, useLocalSearchParams } from "expo-router";
+import { useLocalSearchParams } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import React, { useEffect, useState } from "react";
-import { Alert, FlatList, Text, TouchableOpacity, View } from "react-native";
+import { Button, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-
 
 export default function Index() {
   const { id } = useLocalSearchParams();
-  const { removeRecipe, getRecipe } = useRecipes();
+  const { getRecipe } = useRecipes();
   const [item, setItem] = useState<Recipe | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [index, setIndex] = useState(0);
 
   useEffect(() => {
     const fetchRecipe = async () => {
@@ -36,27 +36,10 @@ export default function Index() {
     )
   }
 
-  const deleteAlert = () => {
-    Alert.alert(
-      "Delete Recipe",
-      "Are you sure you want to delete this recipe?",
-      [
-        {
-          text: "Cancel",
-          style: "cancel"
-        },
-        {
-          text: "Delete",
-          style: "destructive",
-          onPress: () => { router.dismissTo('/'); removeRecipe(item.id); }
-        }
-      ]
-    );
-  };
-
-  console.log("Rendering recipe:", item);
+  console.log(item.steps);
 
   return (
+    <>
     <SafeAreaView
       style={{
         flex: 1,
@@ -67,14 +50,12 @@ export default function Index() {
         <View style={{marginBottom: 32, backgroundColor: '#fff', padding: 16, borderRadius: 8}}>
           <Text>{item.id}</Text>
           <Text>{item.title}</Text>
-          <Text>Ingredients:</Text>
-          <FlatList data={item.ingredients} keyExtractor={(item, index) => index.toString()} renderItem={({item: ing}) => (
-            <Text>- {ing}</Text>
-          )}/>
+          <Text>Step {index  + 1}:</Text>
+          <Text>{item.steps[index]}</Text>
+          <Button title="Previous Step" disabled={index === 0} onPress={() => setIndex(index - 1)} />
+          <Button title="Next Step" disabled={index === item.steps.length - 1 || item.steps.length === 0} onPress={() => setIndex(index + 1)} />
         </View>
-        <TouchableOpacity onPress={() => deleteAlert()}>
-          <Text>Delete Recipe</Text>
-        </TouchableOpacity>
     </SafeAreaView>
+      </>
   );
 }

@@ -27,6 +27,7 @@ export function useRecipes() {
     const recipe: Recipe = {
       id: randomUUID(),
       title,
+      selected: false,
       ingredients,
       steps,
     };
@@ -45,5 +46,11 @@ export function useRecipes() {
     return await getRecipeById(id);
   }
 
-  return { recipes, isLoading, addRecipe, removeRecipe, getRecipe, reloadRecipes };
+  const updateRecipe = async (updatedRecipe: Recipe) => {
+    const newRecipes = recipes.map(recipe => recipe.id === updatedRecipe.id ? updatedRecipe : recipe);
+    setRecipes(newRecipes);
+    await saveRecipes(newRecipes);
+  };
+
+  return { recipes, isLoading, addRecipe, removeRecipe, getRecipe, reloadRecipes, updateRecipe };
 }
