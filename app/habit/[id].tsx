@@ -3,7 +3,7 @@ import { Recipe } from "@/models/Recipe";
 import { router, useLocalSearchParams } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import React, { useEffect, useState } from "react";
-import { Alert, Text, TouchableOpacity, View } from "react-native";
+import { Alert, FlatList, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 
@@ -54,6 +54,8 @@ export default function Index() {
     );
   };
 
+  console.log("Rendering recipe:", item);
+
   return (
     <SafeAreaView
       style={{
@@ -65,6 +67,10 @@ export default function Index() {
         <View style={{marginBottom: 32, backgroundColor: '#fff', padding: 16, borderRadius: 8}}>
           <Text>{item.id}</Text>
           <Text>{item.title}</Text>
+          <Text>Ingredients:</Text>
+          <FlatList data={item.ingredients} keyExtractor={(item, index) => index.toString()} renderItem={({item: ing}) => (
+            <Text>- {ing}</Text>
+          )}/>
         </View>
         <TouchableOpacity onPress={() => deleteAlert()}>
           <Text>Delete Recipe</Text>

@@ -2,7 +2,7 @@ import { useRecipes } from "@/hooks/useRecipes";
 import { Ionicons } from "@expo/vector-icons";
 import { router, useFocusEffect } from "expo-router";
 import { StatusBar } from "expo-status-bar";
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useRef, useState } from "react";
 import { FlatList, Keyboard, Modal, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -10,8 +10,10 @@ export default function Index() {
 
   const [modalVisible, setModalVisible] = useState(false);
   const [titleText, setTitleText] = useState("");
-  const [descriptionText, setDescriptionText] = useState("");
-  const [frequencyText, setFrequencyText] = useState("");
+  const [ingredients, setIngredients] = useState<string[]>([]);
+  const [newIngredientText, setNewIngredientText] = useState("");
+  const [steps, setSteps] = useState<string[]>([]);
+  const ingredientInputRef = useRef<TextInput>(null);
 
   const { recipes, isLoading, addRecipe, reloadRecipes } = useRecipes();
 
@@ -40,13 +42,33 @@ export default function Index() {
       <Modal animationType="slide" visible={modalVisible} onRequestClose={() => { setModalVisible(!modalVisible); }}>
         <SafeAreaView style={{margin: 16}}>
           <View>
-            <TouchableOpacity onPress={() => setModalVisible(!modalVisible)}>
+            <TouchableOpacity onPress={() => {setModalVisible(false); setTitleText(""); setIngredients([]); setSteps([]); setNewIngredientText("")}}>
               <Ionicons name="close" size={32} color="black" />
             </TouchableOpacity>
           </View>
           <Text>New Recipe</Text>
           <TextInput placeholder="Title" value={titleText} onChangeText={(text) => setTitleText(text)}/>
-          <TouchableOpacity onPress={() => { addRecipe(titleText, [], []); setModalVisible(false); setTitleText(""); setDescriptionText(""); setFrequencyText(""); Keyboard.dismiss(); }}>
+          <Text>Ingredients</Text>
+          <FlatList data={ingredients} keyExtractor={(item, index) => index.toString()} renderItem={({item}) => (
+            <TextInput value={item} onChangeText={(text) => {
+              const newIngredients = [...ingredients];
+              const index = newIngredients.indexOf(item);
+              newIngredients[index] = text;
+              setIngredients(newIngredients);
+            }}/>
+          )}/>
+          <TextInput ref={ingredientInputRef}
+          value={newIngredientText}
+          onEndEditing={() => {
+            if (newIngredientText.trim() === "") return;
+              const newIngredients = [...ingredients];
+              newIngredients.push(newIngredientText);
+              setIngredients(newIngredients);
+              setNewIngredientText("");
+              ingredientInputRef.current?.focus();
+            }} 
+            onChangeText={(text) => setNewIngredientText(text)}/>
+          <TouchableOpacity onPress={() => { addRecipe(titleText, ingredients, steps); setModalVisible(false); setTitleText(""); setIngredients([]); setSteps([]); setNewIngredientText(""); Keyboard.dismiss(); }}>
             <Text>Add Recipe</Text>
           </TouchableOpacity>
         </SafeAreaView>

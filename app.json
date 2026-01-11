@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "rhythmo",
-    "slug": "rhythmo",
+    "name": "Recipe Book",
+    "slug": "recipe_book",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "rhythmo",
+    "scheme": "recipe_book",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
