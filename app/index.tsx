@@ -83,7 +83,7 @@ export default function Index() {
                 setSteps(newSteps);
               }} />
             )} />
-            <TextInput multiline numberOfLines={4} style={{borderColor: 'black', borderWidth: 1, borderRadius: 8, marginBottom: 16}} placeholder="Add Step"
+            <TextInput style={{borderColor: 'black', borderWidth: 1, borderRadius: 8, marginBottom: 16}} placeholder="Add Step"
               ref={stepInputRef}
               value={newStepText}
               onEndEditing={() => {
