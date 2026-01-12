@@ -21,6 +21,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 export default function Index() {
   const { id } = useLocalSearchParams();
   const { removeRecipe, getRecipe, updateRecipe } = useRecipes();
+
   const [item, setItem] = useState<Recipe | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [modalVisible, setModalVisible] = useState(false);
@@ -29,6 +30,7 @@ export default function Index() {
   const [newIngredientText, setNewIngredientText] = useState("");
   const [steps, setSteps] = useState<string[]>([]);
   const [newStepText, setNewStepText] = useState("");
+
   const stepInputRef = useRef<TextInput>(null);
   const ingredientInputRef = useRef<TextInput>(null);
 
@@ -222,10 +224,35 @@ export default function Index() {
         }}
       >
         <StatusBar style="dark" />
+        <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+          <TouchableOpacity
+              onPress={() => {
+                router.back();
+              }}
+            >
+              <Ionicons name="close" size={32} color="black" />
+            </TouchableOpacity>
+          <View style={{ flexDirection: "row", justifyContent: "flex-end" }}>
+          <TouchableOpacity style={{ padding: 8 }} onPress={() => toggleSelected()}>
+          <Ionicons
+            name={item.selected ? "star" : "star-outline"}
+            size={16}
+            color="black"
+          />
+        </TouchableOpacity>
+        <TouchableOpacity style={{ padding: 8 }} onPress={() => openEditModal()}>
+          <Ionicons name="pencil" size={16} color="black" />
+        </TouchableOpacity>
+        <TouchableOpacity style={{ padding: 8 }} onPress={() => deleteAlert()}>
+          <Ionicons name="trash" size={16} color="black" />
+        </TouchableOpacity>
+        </View>
+          </View>
+        
         <View
           style={{
             marginBottom: 32,
-            backgroundColor: item.selected ? "#00ff00" : "#fff",
+            backgroundColor: "#fff",
             padding: 16,
             borderRadius: 8,
           }}
@@ -238,16 +265,17 @@ export default function Index() {
             keyExtractor={(item, index) => index.toString()}
             renderItem={({ item: ing }) => <Text>- {ing}</Text>}
           />
+          <Text>Steps:</Text>
+          <FlatList
+            data={item.steps}
+            keyExtractor={(item, index) => index.toString()}
+            renderItem={({ item: step, index }) => (
+              <Text>
+                {index + 1}. {step}
+              </Text>
+            )}
+          />
         </View>
-        <TouchableOpacity onPress={() => toggleSelected()}>
-          <Text>Toggle Selected</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => openEditModal()}>
-          <Text>Edit Recipe</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => deleteAlert()}>
-          <Text>Delete Recipe</Text>
-        </TouchableOpacity>
         <Button
           title="Start cooking!"
           onPress={() =>
