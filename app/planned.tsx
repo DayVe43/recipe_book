@@ -40,7 +40,7 @@ export default function Index() {
           })
           }>
             <View style={{ marginBottom: 32, backgroundColor: '#fff', padding: 16, borderRadius: 8 }}>
-              <Text>{item.title}</Text>
+              <Text style={{fontWeight: 'bold', fontSize: 18}}>{item.title}</Text>
             </View>
           </TouchableOpacity>
         )} />

@@ -1,6 +1,6 @@
 import { Tabs } from "@/components/tabs";
 import { useRecipes } from "@/hooks/useRecipes";
-import { Recipe } from "@/models/Recipe";
+import { Ingredient, Recipe } from "@/models/Recipe";
 import { Ionicons } from "@expo/vector-icons";
 import { router, useLocalSearchParams } from "expo-router";
 import { StatusBar } from "expo-status-bar";
@@ -26,7 +26,7 @@ export default function Index() {
   const [isLoading, setIsLoading] = useState(true);
   const [modalVisible, setModalVisible] = useState(false);
   const [titleText, setTitleText] = useState("");
-  const [ingredients, setIngredients] = useState<string[]>([]);
+  const [ingredients, setIngredients] = useState<Ingredient[]>([]);
   const [newIngredientText, setNewIngredientText] = useState("");
   const [steps, setSteps] = useState<string[]>([]);
   const [newStepText, setNewStepText] = useState("");
@@ -88,6 +88,7 @@ export default function Index() {
     const updatedRecipe: Recipe = {
       ...item,
       selected: !item.selected,
+      ingredients: item.ingredients.map(ing => ({ ...ing, checked: false })),
     };
     await updateRecipe(updatedRecipe);
     setItem(updatedRecipe);
@@ -152,11 +153,11 @@ export default function Index() {
             keyExtractor={(item, index) => index.toString()}
             renderItem={({ item }) => (
               <TextInput
-                value={item}
+                value={item.name}
                 onChangeText={(text) => {
                   const newIngredients = [...ingredients];
                   const index = newIngredients.indexOf(item);
-                  newIngredients[index] = text;
+                  newIngredients[index] = {...item, name: text};
                   setIngredients(newIngredients);
                 }}
               />
@@ -170,7 +171,7 @@ export default function Index() {
             onEndEditing={() => {
               if (newIngredientText.trim() === "") return;
               const newIngredients = [...ingredients];
-              newIngredients.push(newIngredientText);
+              newIngredients.push({name: newIngredientText, quantity: '', checked: false});
               setIngredients(newIngredients);
               setNewIngredientText("");
               ingredientInputRef.current?.focus();
@@ -263,7 +264,7 @@ export default function Index() {
           <FlatList
             data={item.ingredients}
             keyExtractor={(item, index) => index.toString()}
-            renderItem={({ item: ing }) => <Text>- {ing}</Text>}
+            renderItem={({ item: ing }) => <Text>- {ing.name}</Text>}
           />
           <Text>Steps:</Text>
           <FlatList

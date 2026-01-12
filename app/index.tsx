@@ -1,5 +1,6 @@
 import { Tabs } from "@/components/tabs";
 import { useRecipes } from "@/hooks/useRecipes";
+import { Ingredient } from "@/models/Recipe";
 import { Ionicons } from "@expo/vector-icons";
 import { router, useFocusEffect } from "expo-router";
 import { StatusBar } from "expo-status-bar";
@@ -11,7 +12,7 @@ export default function Index() {
 
   const [modalVisible, setModalVisible] = useState(false);
   const [titleText, setTitleText] = useState("");
-  const [ingredients, setIngredients] = useState<string[]>([]);
+  const [ingredients, setIngredients] = useState<Ingredient[]>([]);
   const [newIngredientText, setNewIngredientText] = useState("");
   const [steps, setSteps] = useState<string[]>([]);
   const [newStepText, setNewStepText] = useState("");
@@ -54,10 +55,10 @@ export default function Index() {
             <TextInput style={{borderColor: 'black', borderWidth: 1, borderRadius: 8, marginBottom: 16}} placeholder="Title" value={titleText} onChangeText={(text) => setTitleText(text)} />
             <Text>Ingredients</Text>
             <FlatList data={ingredients} keyExtractor={(item, index) => index.toString()} renderItem={({ item }) => (
-              <TextInput value={item} onChangeText={(text) => {
+              <TextInput value={item.name} onChangeText={(text) => {
                 const newIngredients = [...ingredients];
                 const index = newIngredients.indexOf(item);
-                newIngredients[index] = text;
+                newIngredients[index] = {...item, name: text};
                 setIngredients(newIngredients);
               }} />
             )} />
@@ -67,7 +68,7 @@ export default function Index() {
               onEndEditing={() => {
                 if (newIngredientText.trim() === "") return;
                 const newIngredients = [...ingredients];
-                newIngredients.push(newIngredientText);
+                newIngredients.push({name: newIngredientText, quantity: '', checked: false});
                 setIngredients(newIngredients);
                 setNewIngredientText("");
                 ingredientInputRef.current?.focus();
@@ -105,7 +106,7 @@ export default function Index() {
           })
           }>
             <View style={{ marginBottom: 32, backgroundColor: '#fff', padding: 16, borderRadius: 8 }}>
-              <Text>{item.title}</Text>
+              <Text style={{fontWeight: 'bold', fontSize: 18}}>{item.title}</Text>
             </View>
           </TouchableOpacity>
         )} />

@@ -1,4 +1,4 @@
-import { Recipe } from "@/models/Recipe";
+import { Ingredient, Recipe } from "@/models/Recipe";
 import { getRecipeById, loadRecipes, saveRecipes } from "@/persistence/recipeStorage";
 import { randomUUID } from 'expo-crypto';
 import { useEffect, useState } from "react";
@@ -23,7 +23,7 @@ export function useRecipes() {
     setIsLoading(false);
   };
 
-  const addRecipe = async (title: string, ingredients: string[], steps: string[]) => {
+  const addRecipe = async (title: string, ingredients: Ingredient[], steps: string[]) => {
     const recipe: Recipe = {
       id: randomUUID(),
       title,
