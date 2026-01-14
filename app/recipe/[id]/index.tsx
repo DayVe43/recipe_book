@@ -64,31 +64,27 @@ export default function Index() {
   }
 
   const deleteAlert = () => {
-    Alert.alert(
-      "Delete Recipe",
-      "Are you sure you want to delete this recipe?",
-      [
-        {
-          text: "Cancel",
-          style: "cancel",
+    Alert.alert("Delete Recipe", "This action can't be reversed.", [
+      {
+        text: "Cancel",
+        style: "cancel",
+      },
+      {
+        text: "Delete",
+        style: "destructive",
+        onPress: () => {
+          router.dismissTo("/");
+          removeRecipe(item.id);
         },
-        {
-          text: "Delete",
-          style: "destructive",
-          onPress: () => {
-            router.dismissTo("/");
-            removeRecipe(item.id);
-          },
-        },
-      ]
-    );
+      },
+    ]);
   };
 
   const toggleSelected = async () => {
     const updatedRecipe: Recipe = {
       ...item,
       selected: !item.selected,
-      ingredients: item.ingredients.map(ing => ({ ...ing, checked: false })),
+      ingredients: item.ingredients.map((ing) => ({ ...ing, checked: false })),
     };
     await updateRecipe(updatedRecipe);
     setItem(updatedRecipe);
@@ -157,7 +153,7 @@ export default function Index() {
                 onChangeText={(text) => {
                   const newIngredients = [...ingredients];
                   const index = newIngredients.indexOf(item);
-                  newIngredients[index] = {...item, name: text};
+                  newIngredients[index] = { ...item, name: text };
                   setIngredients(newIngredients);
                 }}
               />
@@ -171,7 +167,11 @@ export default function Index() {
             onEndEditing={() => {
               if (newIngredientText.trim() === "") return;
               const newIngredients = [...ingredients];
-              newIngredients.push({name: newIngredientText, quantity: '', checked: false});
+              newIngredients.push({
+                name: newIngredientText,
+                quantity: "",
+                checked: false,
+              });
               setIngredients(newIngredients);
               setNewIngredientText("");
               ingredientInputRef.current?.focus();
@@ -227,29 +227,38 @@ export default function Index() {
         <StatusBar style="dark" />
         <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
           <TouchableOpacity
-              onPress={() => {
-                router.back();
-              }}
-            >
-              <Ionicons name="close" size={32} color="black" />
-            </TouchableOpacity>
+            onPress={() => {
+              router.back();
+            }}
+          >
+            <Ionicons name="close" size={32} color="black" />
+          </TouchableOpacity>
           <View style={{ flexDirection: "row", justifyContent: "flex-end" }}>
-          <TouchableOpacity style={{ padding: 8 }} onPress={() => toggleSelected()}>
-          <Ionicons
-            name={item.selected ? "star" : "star-outline"}
-            size={16}
-            color="black"
-          />
-        </TouchableOpacity>
-        <TouchableOpacity style={{ padding: 8 }} onPress={() => openEditModal()}>
-          <Ionicons name="pencil" size={16} color="black" />
-        </TouchableOpacity>
-        <TouchableOpacity style={{ padding: 8 }} onPress={() => deleteAlert()}>
-          <Ionicons name="trash" size={16} color="black" />
-        </TouchableOpacity>
-        </View>
+            <TouchableOpacity
+              style={{ padding: 8 }}
+              onPress={() => toggleSelected()}
+            >
+              <Ionicons
+                name={item.selected ? "star" : "star-outline"}
+                size={16}
+                color="black"
+              />
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={{ padding: 8 }}
+              onPress={() => openEditModal()}
+            >
+              <Ionicons name="pencil" size={16} color="black" />
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={{ padding: 8 }}
+              onPress={() => deleteAlert()}
+            >
+              <Ionicons name="trash" size={16} color="black" />
+            </TouchableOpacity>
           </View>
-        
+        </View>
+
         <View
           style={{
             marginBottom: 32,

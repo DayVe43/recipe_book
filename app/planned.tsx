@@ -7,7 +7,6 @@ import { FlatList, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function Index() {
-
   const { recipes, isLoading, reloadRecipes } = useRecipes();
 
   useFocusEffect(
@@ -16,11 +15,28 @@ export default function Index() {
     }, [reloadRecipes])
   );
 
+  const data = recipes.filter((recipe) => recipe.selected);
+
   if (isLoading) {
     return (
-      <SafeAreaView style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <SafeAreaView
+        style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
+      >
         <Text>Loading...</Text>
       </SafeAreaView>
+    );
+  }
+
+  if (data.length === 0) {
+    return (
+      <>
+        <SafeAreaView
+          style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
+        >
+          <Text>No Recipes planned.</Text>
+        </SafeAreaView>
+        <Tabs />
+      </>
     );
   }
 
@@ -33,17 +49,33 @@ export default function Index() {
         }}
       >
         <StatusBar style="dark" />
-        <FlatList data={recipes.filter(recipe => recipe.selected)} keyExtractor={(item) => item.id.toString()} renderItem={({ item }) => (
-          <TouchableOpacity onPress={() => router.navigate({
-            pathname: '/recipe/[id]',
-            params: { id: item.id }
-          })
-          }>
-            <View style={{ marginBottom: 32, backgroundColor: '#fff', padding: 16, borderRadius: 8 }}>
-              <Text style={{fontWeight: 'bold', fontSize: 18}}>{item.title}</Text>
-            </View>
-          </TouchableOpacity>
-        )} />
+        <FlatList
+          data={data}
+          keyExtractor={(item) => item.id.toString()}
+          renderItem={({ item }) => (
+            <TouchableOpacity
+              onPress={() =>
+                router.navigate({
+                  pathname: "/recipe/[id]",
+                  params: { id: item.id },
+                })
+              }
+            >
+              <View
+                style={{
+                  marginBottom: 32,
+                  backgroundColor: "#fff",
+                  padding: 16,
+                  borderRadius: 8,
+                }}
+              >
+                <Text style={{ fontWeight: "bold", fontSize: 18 }}>
+                  {item.title}
+                </Text>
+              </View>
+            </TouchableOpacity>
+          )}
+        />
       </SafeAreaView>
       <Tabs />
     </>
