@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 export function useRecipes() {
   const [recipes, setRecipes] = useState<Array<Recipe>>([]);
   const [isLoading, setIsLoading] = useState(true);
-  
+
   useEffect(() => {
     const load = async () => {
       const loadedRecipes = await loadRecipes();

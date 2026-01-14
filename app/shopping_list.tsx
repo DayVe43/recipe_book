@@ -12,10 +12,10 @@ export default function Index() {
   const { recipes, isLoading, reloadRecipes, updateRecipe } = useRecipes();
 
   useFocusEffect(
-  useCallback(() => {
-    reloadRecipes();
-  }, [reloadRecipes])
-);
+    useCallback(() => {
+      reloadRecipes();
+    }, [reloadRecipes])
+  );
 
   const handleToggleIngredient = async (recipeId: string, ingredientIndex: number, checked: boolean) => {
     const recipe = recipes.find(r => r.id === recipeId);
@@ -38,23 +38,23 @@ export default function Index() {
 
   return (
     <>
-    <SafeAreaView
-      style={{
-        flex: 1,
-        margin: 16,
-      }}
-    >
-      <StatusBar style="dark" />
-      <FlatList data={recipes.filter(recipe => recipe.selected)} keyExtractor={(item) => item.id.toString()} renderItem={({item: recipe}) => (
-        <>
-        <Text style={{fontWeight: 'bold', fontSize: 18, marginBottom: 16}}>{recipe.title}</Text>
-        <FlatList data={recipe.ingredients} keyExtractor={(ing, index) => index.toString()} renderItem={({item: ing, index}) => (
-          <ShoppingListItem ingredient={ing} onToggle={(checked) => handleToggleIngredient(recipe.id, index, checked)} />
-        )}/>
-        </>
-      )} />
+      <SafeAreaView
+        style={{
+          flex: 1,
+          margin: 16,
+        }}
+      >
+        <StatusBar style="dark" />
+        <FlatList data={recipes.filter(recipe => recipe.selected)} keyExtractor={(item) => item.id.toString()} renderItem={({ item: recipe }) => (
+          <>
+            <Text style={{ fontWeight: 'bold', fontSize: 18, marginBottom: 16 }}>{recipe.title}</Text>
+            <FlatList data={recipe.ingredients} keyExtractor={(ing, index) => index.toString()} renderItem={({ item: ing, index }) => (
+              <ShoppingListItem ingredient={ing} onToggle={(checked) => handleToggleIngredient(recipe.id, index, checked)} />
+            )} />
+          </>
+        )} />
       </SafeAreaView>
-    <Tabs />
+      <Tabs />
     </>
   );
 }
