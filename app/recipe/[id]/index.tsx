@@ -1,3 +1,4 @@
+import Button from "@/components/Button";
 import { Tabs } from "@/components/tabs";
 import { useRecipes } from "@/hooks/useRecipes";
 import { Ingredient, Recipe } from "@/models/Recipe";
@@ -7,7 +8,6 @@ import { StatusBar } from "expo-status-bar";
 import { useEffect, useRef, useState } from "react";
 import {
   Alert,
-  Button,
   FlatList,
   Keyboard,
   Modal,
@@ -225,7 +225,7 @@ export default function Index() {
         }}
       >
         <StatusBar style="dark" />
-        <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+        <View style={{ flexDirection: "row", justifyContent: "space-between", marginBottom: 16 }}>
           <TouchableOpacity
             onPress={() => {
               router.back();
@@ -233,28 +233,28 @@ export default function Index() {
           >
             <Ionicons name="close" size={32} color="black" />
           </TouchableOpacity>
-          <View style={{ flexDirection: "row", justifyContent: "flex-end" }}>
+          <View style={{ flexDirection: "row", justifyContent: "flex-end", gap: 8 }}>
             <TouchableOpacity
-              style={{ padding: 8 }}
+              style={{ padding: 4 }}
               onPress={() => toggleSelected()}
             >
               <Ionicons
                 name={item.selected ? "star" : "star-outline"}
-                size={16}
+                size={24}
                 color="black"
               />
             </TouchableOpacity>
             <TouchableOpacity
-              style={{ padding: 8 }}
+              style={{ padding: 4 }}
               onPress={() => openEditModal()}
             >
-              <Ionicons name="pencil" size={16} color="black" />
+              <Ionicons name="pencil" size={24} color="black" />
             </TouchableOpacity>
             <TouchableOpacity
-              style={{ padding: 8 }}
+              style={{ padding: 4 }}
               onPress={() => deleteAlert()}
             >
-              <Ionicons name="trash" size={16} color="black" />
+              <Ionicons name="trash" size={24} color="black" />
             </TouchableOpacity>
           </View>
         </View>
@@ -262,31 +262,31 @@ export default function Index() {
         <View
           style={{
             marginBottom: 32,
-            backgroundColor: "#fff",
-            padding: 16,
-            borderRadius: 8,
           }}
         >
-          <Text>{item.id}</Text>
-          <Text>{item.title}</Text>
-          <Text>Ingredients:</Text>
-          <FlatList
-            data={item.ingredients}
-            keyExtractor={(item, index) => index.toString()}
-            renderItem={({ item: ing }) => <Text>- {ing.name}</Text>}
-          />
-          <Text>Steps:</Text>
-          <FlatList
-            data={item.steps}
-            keyExtractor={(item, index) => index.toString()}
-            renderItem={({ item: step, index }) => (
-              <Text>
-                {index + 1}. {step}
-              </Text>
-            )}
-          />
+          <Text style={{ fontSize: 24, fontWeight: "bold", marginBottom: 16 }}>{item.title}</Text>
+          <View style={{ marginBottom: 16 }}>
+            <Text style={{ fontWeight: "semibold", fontSize: 18 }}>Ingredients:</Text>
+            <FlatList
+              data={item.ingredients}
+              keyExtractor={(item, index) => index.toString()}
+              renderItem={({ item: ing }) => <Text>- {ing.name}</Text>}
+            />
+          </View>
+          <View>
+            <Text style={{ fontWeight: "semibold", fontSize: 18 }}>Steps:</Text>
+            <FlatList
+              data={item.steps}
+              keyExtractor={(item, index) => index.toString()}
+              renderItem={({ item: step, index }) => (
+                <Text>
+                  {index + 1}. {step}
+                </Text>
+              )}
+            />
+          </View>
         </View>
-        <Button
+        <Button style={{ marginTop: "auto" }}
           title="Start cooking!"
           onPress={() =>
             router.navigate({

@@ -1,3 +1,4 @@
+import Button from "@/components/Button";
 import { Tabs } from "@/components/tabs";
 import { useRecipes } from "@/hooks/useRecipes";
 import { Ingredient } from "@/models/Recipe";
@@ -5,7 +6,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { router, useFocusEffect } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import React, { useCallback, useRef, useState } from "react";
-import { Button, FlatList, Keyboard, Modal, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { FlatList, Keyboard, Modal, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function Index() {
@@ -52,30 +53,30 @@ export default function Index() {
               </TouchableOpacity>
             </View>
             <Text>New Recipe</Text>
-            <TextInput style={{borderColor: 'black', borderWidth: 1, borderRadius: 8, marginBottom: 16}} placeholder="Title" value={titleText} onChangeText={(text) => setTitleText(text)} />
+            <TextInput style={{ borderColor: 'black', borderWidth: 1, borderRadius: 8, marginBottom: 16 }} placeholder="Title" value={titleText} onChangeText={(text) => setTitleText(text)} />
             <Text>Ingredients</Text>
             <FlatList data={ingredients} keyExtractor={(item, index) => index.toString()} renderItem={({ item }) => (
               <TextInput value={item.name} onChangeText={(text) => {
                 const newIngredients = [...ingredients];
                 const index = newIngredients.indexOf(item);
-                newIngredients[index] = {...item, name: text};
+                newIngredients[index] = { ...item, name: text };
                 setIngredients(newIngredients);
               }} />
             )} />
-            <TextInput style={{borderColor: 'black', borderWidth: 1, borderRadius: 8}} placeholder="Add Ingredient"
+            <TextInput style={{ borderColor: 'black', borderWidth: 1, borderRadius: 8 }} placeholder="Add Ingredient"
               ref={ingredientInputRef}
               value={newIngredientText}
               onEndEditing={() => {
                 if (newIngredientText.trim() === "") return;
                 const newIngredients = [...ingredients];
-                newIngredients.push({name: newIngredientText, quantity: '', checked: false});
+                newIngredients.push({ name: newIngredientText, quantity: '', checked: false });
                 setIngredients(newIngredients);
                 setNewIngredientText("");
                 ingredientInputRef.current?.focus();
               }}
               onChangeText={(text) => setNewIngredientText(text)} />
-              
-            <Text style={{marginTop: 16}}>Steps</Text>
+
+            <Text style={{ marginTop: 16 }}>Steps</Text>
             <FlatList data={steps} keyExtractor={(item, index) => index.toString()} renderItem={({ item }) => (
               <TextInput value={item} onChangeText={(text) => {
                 const newSteps = [...steps];
@@ -84,7 +85,7 @@ export default function Index() {
                 setSteps(newSteps);
               }} />
             )} />
-            <TextInput style={{borderColor: 'black', borderWidth: 1, borderRadius: 8, marginBottom: 16}} placeholder="Add Step"
+            <TextInput style={{ borderColor: 'black', borderWidth: 1, borderRadius: 8, marginBottom: 16 }} placeholder="Add Step"
               ref={stepInputRef}
               value={newStepText}
               onEndEditing={() => {
@@ -96,7 +97,7 @@ export default function Index() {
                 stepInputRef.current?.focus();
               }}
               onChangeText={(text) => setNewStepText(text)} />
-            <Button title="Add Recipe" onPress={() => { addRecipe(titleText, ingredients, steps); setModalVisible(false); setTitleText(""); setIngredients([]); setSteps([]); setNewIngredientText(""); Keyboard.dismiss(); }}/>
+            <Button title="Add Recipe" onPress={() => { addRecipe(titleText, ingredients, steps); setModalVisible(false); setTitleText(""); setIngredients([]); setSteps([]); setNewIngredientText(""); Keyboard.dismiss(); }} />
           </SafeAreaView>
         </Modal>
         <FlatList data={recipes} keyExtractor={(item) => item.id.toString()} renderItem={({ item }) => (
@@ -106,12 +107,12 @@ export default function Index() {
           })
           }>
             <View style={{ marginBottom: 32, backgroundColor: '#fff', padding: 16, borderRadius: 8 }}>
-              <Text style={{fontWeight: 'bold', fontSize: 18}}>{item.title}</Text>
+              <Text style={{ fontWeight: 'bold', fontSize: 18 }}>{item.title}</Text>
             </View>
           </TouchableOpacity>
         )} />
         <TouchableOpacity onPress={() => setModalVisible(true)} style={{ position: 'absolute', bottom: 16, right: 16 }}>
-          <Ionicons name="add-circle" size={64} color="blue" />
+          <Ionicons name="add-circle" size={64} color="black" />
         </TouchableOpacity>
       </SafeAreaView>
       <Tabs />

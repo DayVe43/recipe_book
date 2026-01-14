@@ -1,9 +1,12 @@
+import Button from "@/components/Button";
+import { Tabs } from "@/components/tabs";
 import { useRecipes } from "@/hooks/useRecipes";
 import { Recipe } from "@/models/Recipe";
-import { useLocalSearchParams } from "expo-router";
+import { Ionicons } from "@expo/vector-icons";
+import { router, useLocalSearchParams } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import React, { useEffect, useState } from "react";
-import { Button, Text, View } from "react-native";
+import { Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function Index() {
@@ -51,24 +54,31 @@ export default function Index() {
         }}
       >
         <StatusBar style="dark" />
+        <View style={{ flexDirection: "row", justifyContent: "space-between", marginBottom: 16 }}>
+          <TouchableOpacity
+            onPress={() => {
+              router.back();
+            }}
+          >
+            <Ionicons name="close" size={32} color="black" />
+          </TouchableOpacity>
+        </View>
         <View
           style={{
             marginBottom: 32,
-            backgroundColor: "#fff",
-            padding: 16,
-            borderRadius: 8,
           }}
         >
-          <Text>{item.id}</Text>
-          <Text>{item.title}</Text>
-          <Text>Step {index + 1}:</Text>
+          <Text style={{ fontSize: 24, fontWeight: "bold", marginBottom: 16 }}>{item.title}</Text>
+          <Text style={{ fontSize: 18, fontWeight: "semibold" }}>Step {index + 1}:</Text>
           <Text>{item.steps[index]}</Text>
-          <Button
+        </View>
+        <View style={{ flexDirection: "row", justifyContent: "space-between", gap: 16, marginTop: 'auto' }}>
+          <Button style={{ flex: 1 }}
             title="Previous Step"
             disabled={index === 0}
             onPress={() => setIndex(index - 1)}
           />
-          <Button
+          <Button style={{ flex: 1 }}
             title="Next Step"
             disabled={
               index === item.steps.length - 1 || item.steps.length === 0
@@ -77,6 +87,7 @@ export default function Index() {
           />
         </View>
       </SafeAreaView>
+      <Tabs />
     </>
   );
 }
