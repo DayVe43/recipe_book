@@ -131,19 +131,19 @@ export default function Index() {
               <Ionicons name="close" size={32} color="black" />
             </TouchableOpacity>
           </View>
-          <Text>Edit Recipe</Text>
+          <Text style={{ fontSize: 24, fontWeight: "bold", marginBottom: 16, marginTop: 8 }}>Edit Recipe</Text>
           <TextInput
             style={{
               borderColor: "black",
               borderWidth: 1,
               borderRadius: 8,
-              marginBottom: 16,
+              marginBottom: 32,
             }}
             placeholder="Title"
             value={titleText}
             onChangeText={(text) => setTitleText(text)}
           />
-          <Text>Ingredients</Text>
+          <Text style={{ fontSize: 18, fontWeight: "semibold", marginBottom: 8 }}>Ingredients</Text>
           <FlatList
             data={ingredients}
             keyExtractor={(item, index) => index.toString()}
@@ -179,7 +179,7 @@ export default function Index() {
             onChangeText={(text) => setNewIngredientText(text)}
           />
 
-          <Text style={{ marginTop: 16 }}>Steps</Text>
+          <Text style={{ fontSize: 18, fontWeight: "semibold", marginBottom: 8, marginTop: 32 }}>Steps</Text>
           <FlatList
             data={steps}
             keyExtractor={(item, index) => index.toString()}
@@ -200,7 +200,7 @@ export default function Index() {
               borderColor: "black",
               borderWidth: 1,
               borderRadius: 8,
-              marginBottom: 16,
+              marginBottom: 32,
             }}
             placeholder="Add Step"
             ref={stepInputRef}
