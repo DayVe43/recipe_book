@@ -10,7 +10,10 @@ import {
   Alert,
   FlatList,
   Keyboard,
+  KeyboardAvoidingView,
   Modal,
+  Platform,
+  ScrollView,
   Text,
   TextInput,
   TouchableOpacity,
@@ -121,102 +124,100 @@ export default function Index() {
           setModalVisible(!modalVisible);
         }}
       >
-        <SafeAreaView style={{ margin: 16 }}>
-          <View>
-            <TouchableOpacity
-              onPress={() => {
-                setModalVisible(false);
-              }}
-            >
-              <Ionicons name="close" size={32} color="black" />
-            </TouchableOpacity>
-          </View>
-          <Text style={{ fontSize: 24, fontWeight: "bold", marginBottom: 16, marginTop: 8 }}>Edit Recipe</Text>
-          <TextInput
-            style={{
-              borderColor: "black",
-              borderWidth: 1,
-              borderRadius: 8,
-              marginBottom: 32,
-            }}
-            placeholder="Title"
-            value={titleText}
-            onChangeText={(text) => setTitleText(text)}
-          />
-          <Text style={{ fontSize: 18, fontWeight: "semibold", marginBottom: 8 }}>Ingredients</Text>
-          <FlatList
-            data={ingredients}
-            keyExtractor={(item, index) => index.toString()}
-            renderItem={({ item }) => (
+        <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"} style={{ flex: 1 }}>
+          <SafeAreaView style={{ flex: 1 }}>
+            <View style={{ margin: 16 }}>
+              <TouchableOpacity
+                onPress={() => {
+                  setModalVisible(false);
+                }}
+              >
+                <Ionicons name="close" size={32} color="black" />
+              </TouchableOpacity>
+              <Text style={{ fontSize: 24, fontWeight: "bold", marginBottom: 16, marginTop: 8 }}>Edit Recipe</Text>
+            </View>
+            <ScrollView showsVerticalScrollIndicator={true} contentContainerStyle={{ paddingBottom: 20, paddingHorizontal: 16 }}>
               <TextInput
-                value={item.name}
-                onChangeText={(text) => {
+                style={{
+                  borderColor: "black",
+                  borderWidth: 1,
+                  borderRadius: 8,
+                  marginBottom: 32,
+                }}
+                placeholder="Title"
+                value={titleText}
+                onChangeText={(text) => setTitleText(text)}
+              />
+              <Text style={{ fontSize: 18, fontWeight: "semibold", marginBottom: 8 }}>Ingredients</Text>
+              {ingredients.map((item, index) => (
+                <TextInput
+                  key={index}
+                  value={item.name}
+                  onChangeText={(text) => {
+                    const newIngredients = [...ingredients];
+                    newIngredients[index] = { ...item, name: text };
+                    setIngredients(newIngredients);
+                  }}
+                />
+              ))}
+              <TextInput
+                style={{ borderColor: "black", borderWidth: 1, borderRadius: 8 }}
+                placeholder="Add Ingredient"
+                ref={ingredientInputRef}
+                value={newIngredientText}
+                onEndEditing={() => {
+                  if (newIngredientText.trim() === "") return;
                   const newIngredients = [...ingredients];
-                  const index = newIngredients.indexOf(item);
-                  newIngredients[index] = { ...item, name: text };
+                  newIngredients.push({
+                    name: newIngredientText,
+                    quantity: "",
+                    checked: false,
+                  });
                   setIngredients(newIngredients);
+                  setNewIngredientText("");
+                  ingredientInputRef.current?.focus();
                 }}
+                onChangeText={(text) => setNewIngredientText(text)}
               />
-            )}
-          />
-          <TextInput
-            style={{ borderColor: "black", borderWidth: 1, borderRadius: 8 }}
-            placeholder="Add Ingredient"
-            ref={ingredientInputRef}
-            value={newIngredientText}
-            onEndEditing={() => {
-              if (newIngredientText.trim() === "") return;
-              const newIngredients = [...ingredients];
-              newIngredients.push({
-                name: newIngredientText,
-                quantity: "",
-                checked: false,
-              });
-              setIngredients(newIngredients);
-              setNewIngredientText("");
-              ingredientInputRef.current?.focus();
-            }}
-            onChangeText={(text) => setNewIngredientText(text)}
-          />
 
-          <Text style={{ fontSize: 18, fontWeight: "semibold", marginBottom: 8, marginTop: 32 }}>Steps</Text>
-          <FlatList
-            data={steps}
-            keyExtractor={(item, index) => index.toString()}
-            renderItem={({ item }) => (
+              <Text style={{ fontSize: 18, fontWeight: "semibold", marginBottom: 8, marginTop: 32 }}>Steps</Text>
+              {steps.map((item, index) => (
+                <TextInput
+                  key={index}
+                  value={item}
+                  onChangeText={(text) => {
+                    const newSteps = [...steps];
+                    newSteps[index] = text;
+                    setSteps(newSteps);
+                  }}
+                />
+              ))}
               <TextInput
-                value={item}
-                onChangeText={(text) => {
-                  const newSteps = [...steps];
-                  const index = newSteps.indexOf(item);
-                  newSteps[index] = text;
-                  setSteps(newSteps);
+                style={{
+                  borderColor: "black",
+                  borderWidth: 1,
+                  borderRadius: 8,
+                  marginBottom: 32,
                 }}
+                placeholder="Add Step"
+                ref={stepInputRef}
+                value={newStepText}
+                onEndEditing={() => {
+                  if (newStepText.trim() === "") return;
+                  const newSteps = [...steps];
+                  newSteps.push(newStepText);
+                  setSteps(newSteps);
+                  setNewStepText("");
+                  stepInputRef.current?.focus();
+                }}
+                onChangeText={(text) => setNewStepText(text)}
               />
-            )}
-          />
-          <TextInput
-            style={{
-              borderColor: "black",
-              borderWidth: 1,
-              borderRadius: 8,
-              marginBottom: 32,
-            }}
-            placeholder="Add Step"
-            ref={stepInputRef}
-            value={newStepText}
-            onEndEditing={() => {
-              if (newStepText.trim() === "") return;
-              const newSteps = [...steps];
-              newSteps.push(newStepText);
-              setSteps(newSteps);
-              setNewStepText("");
-              stepInputRef.current?.focus();
-            }}
-            onChangeText={(text) => setNewStepText(text)}
-          />
-          <Button title="Save Recipe" onPress={saveRecipe} />
-        </SafeAreaView>
+            </ScrollView>
+            <View style={{ margin: 16, marginTop: 0 }}>
+              <Button title="Save Recipe" onPress={saveRecipe} />
+            </View>
+          </SafeAreaView>
+        </KeyboardAvoidingView>
       </Modal>
       <SafeAreaView
         style={{

@@ -4,7 +4,7 @@
     "source.fixAll": "explicit",
     "source.organizeImports": "explicit",
     "source.sortMembers": "explicit",
-    "source.fixAll.eslint": true,
+    "source.fixAll.eslint": "explicit"
   },
   "eslint.validate": [
     "javascript",
