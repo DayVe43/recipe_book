@@ -92,11 +92,25 @@ Die Anwendung richtet sich an Privatpersonen, die ihre Mahlzeitenplanung optimie
    - Bestätigtes Rezept wird lokal gespeichert (siehe Anforderungen zur lokalen KI-Privacy)
 
 10. **AI-basierter Rezeptimport (Bild / Foto) (OPTIONAL)** 🔧
+   - Benutzer macht ein Foto eines gedruckten Rezepts oder eines Bildschirms / pausiert ein Video-Frame
+   - Lokale AI führt OCR und semantische Zuordnung durch, erkennt Zutaten, Mengenangaben und Schritte
+   - App zeigt erkannte Felder zur Bestätigung/Bearbeitung an
+   - Bestätigtes Rezept wird lokal gespeichert
 
-- Benutzer macht ein Foto eines gedruckten Rezepts oder eines Bildschirms / pausiert ein Video-Frame
-- Lokale AI führt OCR und semantische Zuordnung durch, erkennt Zutaten, Mengenangaben und Schritte
-- App zeigt erkannte Felder zur Bestätigung/Bearbeitung an
-- Bestätigtes Rezept wird lokal gespeichert
+11. **Lokalisierung / Übersetzung (OPTIONAL)** 🌐
+   - Benutzer wählt eine bevorzugte Sprache in den Einstellungen oder die App detektiert Sprache automatisch
+   - UI-Strings sind übersetzbar; importierte Rezepte können lokal in die Nutzersprache übersetzt werden
+   - Nutzer kann erkannte Übersetzungen prüfen und manuell anpassen, bevor gespeichert wird
+
+12. **Daten-Import / Export (OPTIONAL)** ⤴️⤵️
+   - Benutzer exportiert Rezepte als JSON/CSV oder importiert Rezepte/Backups aus anderen Quellen
+   - Import zeigt Vorschau mit Feldzuordnung (z. B. Zutaten, Mengen, Schritte) und verlangt Nutzerbestätigung
+   - Import/Export kann lokal erfolgen; optionale Ergänzung durch Cloud-Import ist möglich (siehe UC13)
+
+13. **Cloud-Speicher & Nutzerprofil (OPTIONAL)** ☁️
+   - Nutzer kann ein Konto anlegen und Rezepte in der Cloud synchronisieren (Backup & Sync)
+   - Synchronisierung ist optional; lokale-only Modus bleibt Standard
+   - Datenschutz: Nutzer entscheidet, ob Daten cloudgespeichert werden; sichere Authentifizierung und optionale Verschlüsselung empfohlen
 
 ### User Stories
 
@@ -131,6 +145,13 @@ Die Anwendung richtet sich an Privatpersonen, die ihre Mahlzeitenplanung optimie
 - Als **fotofreundlicher Nutzer**, möchte ich **ein gedrucktes Rezept per Foto hinzufügen können**, damit **ich schnell physische Rezepte digitalisiere**.
 - Als **datenschutzbewusster Nutzer**, möchte ich **dass die AI lokal auf dem Gerät läuft**, damit **keine Rezeptdaten das Gerät verlassen und meine Daten privat bleiben**.
 
+**Optionale Funktionen (OPTIONAL):** 💡
+
+- Als **internationaler Nutzer**, möchte ich **die App in meiner Sprache nutzen können**, damit **ich UI-Elemente und Rezeptinhalte besser verstehe**. (Lokalisierung / Übersetzung)
+- Als **Backup-orientierter Nutzer**, möchte ich **meine Rezepte exportieren und importieren können**, damit **ich Backups erstelle oder Rezepte zwischen Geräten und Apps übertrage**. (Daten-Import / Export)
+- Als **geräteübergreifender Nutzer**, möchte ich **ein Cloud-Konto und Synchronisation haben**, damit **meine Rezepte auf mehreren Geräten verfügbar sind und gesichert werden**. (Cloud-Speicher & Nutzerprofil)
+- Als **datenschutzbewusster Nutzer**, möchte ich **dass Cloud-Synchronisation optional ist und ich kontrolliere, welche Daten geteilt werden**, damit **meine privaten Rezepte lokal bleiben können**.
+
 ### Requirements
 
 | ID      | Name                              | Priorität    | Beschreibung                                                                                                                                 | Use Case |
@@ -148,8 +169,11 @@ Die Anwendung richtet sich an Privatpersonen, die ihre Mahlzeitenplanung optimie
 | REQ-011 | Lokale Persistierung              | MUST         | Alle Rezepte werden lokal auf dem Gerät gespeichert und bleiben nach App-Neustart erhalten                                                   | Alle     |
 | REQ-012 | Navigation zwischen Screens       | MUST         | Tab-basierte Navigation zwischen Rezepte, Geplant und Einkaufsliste                                                                          | Alle     |
 | REQ-013 | Responsive UI                     | MUST         | Benutzeroberfläche funktioniert auf verschiedenen Gerätetypen und Bildschirmgrößen                                                           | Alle     |
-| REQ-014 | AI-Rezeptimport (Link/Text/Video) | CAN/OPTIONAL | Lokale KI extrahiert Titel, Zutaten und Schritte aus Webseiten oder Video-Transkripten; Nutzer bestätigt erkannte Felder vor dem Speichern   | UC9      |
-| REQ-015 | AI-Rezeptimport (Bild/OCR)        | CAN/OPTIONAL | Lokale KI führt OCR und semantische Zuordnung auf Fotos/Frames aus, erkennt Zutaten, Mengen und Schritte; Nutzer bestätigt vor dem Speichern | UC10     |
+| REQ-014 | AI-Rezeptimport (Link/Text/Video) | OPTIONAL | Lokale KI extrahiert Titel, Zutaten und Schritte aus Webseiten oder Video-Transkripten; Nutzer bestätigt erkannte Felder vor dem Speichern   | UC9      |
+| REQ-015 | AI-Rezeptimport (Bild/OCR)        | OPTIONAL | Lokale KI führt OCR und semantische Zuordnung auf Fotos/Frames aus, erkennt Zutaten, Mengen und Schritte; Nutzer bestätigt vor dem Speichern | UC10     |
+| REQ-016 | Lokalisierung / Übersetzung       | OPTIONAL | App bietet UI-Lokalisierung; importierte Rezepte können lokal in die Nutzersprache übersetzt werden; Nutzer kann Sprache wählen und Übersetzungen bestätigen | UC11     |
+| REQ-017 | Daten-Import / Export             | OPTIONAL | Benutzer kann Rezepte lokal als JSON/CSV exportieren und importieren; Import zeigt Mapping/Preview und verlangt Bestätigung | UC12     |
+| REQ-018 | Cloud-Speicher & Nutzerprofil     | OPTIONAL | Optionale Cloud-Konten zur Synchronisation und Backup; sichere Authentifizierung; Nutzer kann Sync deaktivieren und lokale Speicherung bevorzugen | UC13     |
 
 ## 3. Umsetzung / Implementierung
 
