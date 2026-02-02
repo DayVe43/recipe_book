@@ -1,9 +1,10 @@
+import RecipeCard from "@/components/RecipeCard";
 import { Tabs } from "@/components/tabs";
 import { useRecipes } from "@/hooks/useRecipes";
 import { router, useFocusEffect } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import React, { useCallback } from "react";
-import { FlatList, Text, TouchableOpacity, View } from "react-native";
+import { FlatList, Text } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function Index() {
@@ -12,7 +13,7 @@ export default function Index() {
   useFocusEffect(
     useCallback(() => {
       reloadRecipes();
-    }, [reloadRecipes])
+    }, [reloadRecipes]),
   );
 
   const data = recipes.filter((recipe) => recipe.selected);
@@ -53,27 +54,15 @@ export default function Index() {
           data={data}
           keyExtractor={(item) => item.id.toString()}
           renderItem={({ item }) => (
-            <TouchableOpacity
+            <RecipeCard
+              recipe={item}
               onPress={() =>
                 router.navigate({
                   pathname: "/recipe/[id]",
                   params: { id: item.id },
                 })
               }
-            >
-              <View
-                style={{
-                  marginBottom: 32,
-                  backgroundColor: "#fff",
-                  padding: 16,
-                  borderRadius: 8,
-                }}
-              >
-                <Text style={{ fontWeight: "bold", fontSize: 18 }}>
-                  {item.title}
-                </Text>
-              </View>
-            </TouchableOpacity>
+            />
           )}
         />
       </SafeAreaView>

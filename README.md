@@ -1,16 +1,19 @@
-# Pflichtenheft - *Chef's Note*
-*Chef's Note* ist eine mobile Anwendung, die Nutzende bei der einfachen Planung und Organisation von Mahlzeiten unterstützt.
+# Pflichtenheft - _Chef's Note_
+
+_Chef's Note_ ist eine mobile Anwendung, die Nutzende bei der einfachen Planung und Organisation von Mahlzeiten unterstützt.
 
 ## 1. Einleitung
+
 ### Motivation und Zielsetzung
 
 **Motivation:**
 Im Alltag vieler Menschen entsteht eine zentrale Herausforderung: die Planung von abwechslungsreichen und ausgewogenen Mahlzeiten. Mit der Zeit sammeln sich zahlreiche Rezepte aus verschiedensten Quellen an – handschriftliche Notizen, Kochbücher, Webseiten oder soziale Medien – die verstreut und unorganisiert sind. Dies führt zu Überforderung, kostet unnötig Zeit und verstärkt die Tendenz, immer wieder zu denselben Gerichten zu greifen. Das Resultat ist häufig eine unausgewogene Ernährung und der Verlust kulinarischer Vielfalt.
 
 **Zielsetzung:**
-*Chef's Note* adressiert dieses Problem durch eine zentrale, intuitive Plattform zur Rezeptverwaltung. Die Anwendung ermöglicht es Nutzenden, ihre Rezepte schnell zu sammeln, übersichtlich zu organisieren und intelligent zu planen. Darüber hinaus unterstützt *Chef's Note* durch automatisierte Funktionen bei der Mahlzeitenplanung und der Erstellung von Einkaufslisten, um den gesamten Workflow vom Rezeptgedanken bis zur Umsetzung in der Küche zu optimieren.
+_Chef's Note_ adressiert dieses Problem durch eine zentrale, intuitive Plattform zur Rezeptverwaltung. Die Anwendung ermöglicht es Nutzenden, ihre Rezepte schnell zu sammeln, übersichtlich zu organisieren und intelligent zu planen. Darüber hinaus unterstützt _Chef's Note_ durch automatisierte Funktionen bei der Mahlzeitenplanung und der Erstellung von Einkaufslisten, um den gesamten Workflow vom Rezeptgedanken bis zur Umsetzung in der Küche zu optimieren.
 
 ## 2. Grundlagen
+
 ### Detaillierte Problemstellung
 
 **Zentrale Herausforderungen:**
@@ -28,26 +31,25 @@ Im Alltag vieler Menschen entsteht eine zentrale Herausforderung: die Planung vo
 **Zielgruppe:**
 Die Anwendung richtet sich an Privatpersonen, die ihre Mahlzeitenplanung optimieren, ihre Rezepte zentral verwalten und Zeit bei der Organisation sparen möchten – von Kochanfängern bis zu erfahrenen Hobby-Köchen.
 
-
 ### Technologieauswahl (mit Begründung)
 
-| Technologie | Zweck | Begründung |
-|---|---|---|
-| **Expo** | Framework für plattformübergreifende mobile Entwicklung | Ermöglicht schnelle Entwicklung und einfaches Testing auf iOS und Android ohne native Build-Konfiguration |
-| **React Native** | Native Mobile App Entwicklungsframework | Erlaubt Code-Sharing zwischen iOS und Android mit nativer Performance |
-| **Expo Router** | Navigation und Routing für React Native | Dateibasiertes Routing ähnlich wie Next.js, ermöglicht strukturierte und intuitive Navigation |
-| **TypeScript** | Statisch typisierte JavaScript-Variante | Verbessert Code-Qualität, ermöglicht frühe Fehlererkennung und bessere Developer Experience |
-| **React Navigation** | Navigation zwischen Screens und Tabs | Flexible und performante Navigationslösung mit Bottom-Tab und Stack Navigation Patterns |
-| **Async Storage** | Persistente lokale Datenspeicherung | Einfache und zuverlässige Methode zur Offline-Persistierung von Rezepten und Plänen auf dem Gerät |
-| **React Native StyleSheet** | Styling der Benutzeroberfläche | Native StyleSheet API für performance-optimiertes und plattformübergreifendes Styling ohne CSS |
-| **ESLint** | Code-Linting und Formatierung | Sichert Code-Qualität, Konsistenz und verhindert häufige Fehler |
-| **Gradle** | Build-System für Android | Standard-Build-Tool für Android-Entwicklung, integriert in Expo-Workflow |
+| Technologie                 | Zweck                                                   | Begründung                                                                                                |
+| --------------------------- | ------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| **Expo**                    | Framework für plattformübergreifende mobile Entwicklung | Ermöglicht schnelle Entwicklung und einfaches Testing auf iOS und Android ohne native Build-Konfiguration |
+| **React Native**            | Native Mobile App Entwicklungsframework                 | Erlaubt Code-Sharing zwischen iOS und Android mit nativer Performance                                     |
+| **Expo Router**             | Navigation und Routing für React Native                 | Dateibasiertes Routing ähnlich wie Next.js, ermöglicht strukturierte und intuitive Navigation             |
+| **TypeScript**              | Statisch typisierte JavaScript-Variante                 | Verbessert Code-Qualität, ermöglicht frühe Fehlererkennung und bessere Developer Experience               |
+| **React Navigation**        | Navigation zwischen Screens und Tabs                    | Flexible und performante Navigationslösung mit Bottom-Tab und Stack Navigation Patterns                   |
+| **Async Storage**           | Persistente lokale Datenspeicherung                     | Einfache und zuverlässige Methode zur Offline-Persistierung von Rezepten und Plänen auf dem Gerät         |
+| **React Native StyleSheet** | Styling der Benutzeroberfläche                          | Native StyleSheet API für performance-optimiertes und plattformübergreifendes Styling ohne CSS            |
+| **ESLint**                  | Code-Linting und Formatierung                           | Sichert Code-Qualität, Konsistenz und verhindert häufige Fehler                                           |
+| **Gradle**                  | Build-System für Android                                | Standard-Build-Tool für Android-Entwicklung, integriert in Expo-Workflow                                  |
 
 ### Use Cases
 
 1. **Rezept hinzufügen**
    - Benutzer öffnet die App und klickt auf den "+" Button
-   - Modal öffnet sich mit Eingabefeldern für Titel, Zutaten und Schritte
+   - Modal öffnet sich (implementiert als `components/RecipeFormModal.tsx`) mit Eingabefeldern für Titel, Zutaten und Schritte
    - Benutzer speichert das Rezept in der lokalen Speicherung
 
 2. **Rezept anschauen**
@@ -56,7 +58,7 @@ Die Anwendung richtet sich an Privatpersonen, die ihre Mahlzeitenplanung optimie
 
 3. **Rezept bearbeiten**
    - Benutzer öffnet ein Rezept und klickt den Bearbeitungs-Button (Stift-Icon)
-   - Modal öffnet sich mit allen Feldern zum Ändern
+   - Modal öffnet sich (implementiert als `components/RecipeFormModal.tsx`) mit allen Feldern zum Ändern
    - Änderungen werden gespeichert
 
 4. **Rezept löschen**
@@ -83,45 +85,71 @@ Die Anwendung richtet sich an Privatpersonen, die ihre Mahlzeitenplanung optimie
    - Wird zu Schritt-für-Schritt Seite navigiert
    - Kann mit "Next Step" / "Previous Step" Buttons navigieren
 
+9. **AI-basierter Rezeptimport (Link / Text / Video) (OPTIONAL)** 🔧
+   - Benutzer fügt einen Link zu einem Rezept oder Video ein (z. B. Blog, Webseite, YouTube)
+   - Lokale AI analysiert die Zielseite bzw. Transkription, extrahiert Titel, Zutaten und Schritte
+   - Eine Vorschau des erkannten Rezepts wird angezeigt; Benutzer bestätigt oder bearbeitet die Felder
+   - Bestätigtes Rezept wird lokal gespeichert (siehe Anforderungen zur lokalen KI-Privacy)
+
+10. **AI-basierter Rezeptimport (Bild / Foto) (OPTIONAL)** 🔧
+
+- Benutzer macht ein Foto eines gedruckten Rezepts oder eines Bildschirms / pausiert ein Video-Frame
+- Lokale AI führt OCR und semantische Zuordnung durch, erkennt Zutaten, Mengenangaben und Schritte
+- App zeigt erkannte Felder zur Bestätigung/Bearbeitung an
+- Bestätigtes Rezept wird lokal gespeichert
+
 ### User Stories
 
 **Rezept-Verwaltung:**
+
 - Als **Hobbyköchin**, möchte ich **meine Lieblingsrezepte zentral speichern können**, damit **ich sie jederzeit schnell finde und nicht mehrere Apps durchsuchen muss**.
 - Als **Kochanfänger**, möchte ich **Rezepte mit Zutaten und Schritt-für-Schritt Anleitung speichern**, damit **ich die Rezepte später reproduzieren kann**.
 
 **Mahlzeitenplanung:**
+
 - Als **berufstätige Person**, möchte ich **Rezepte für die kommende Woche auswählen können**, damit **ich beim Einkaufen weiß, was ich kaufen muss**.
 - Als **Familie mit Kindern**, möchte ich **Mahlzeiten planen und ändern können**, damit **die Familie ausgewogen und vielfältig isst**.
 
 **Einkaufsvorbereitung:**
+
 - Als **Einkaufer**, möchte ich **eine Einkaufsliste aus meinen geplanten Rezepten generiert bekommen**, damit **ich keine Zutat vergesse und Zeit beim Einkaufen spare**.
 - Als **Sparsamer Einkaufer**, möchte ich **Zutaten abhaken beim Einkaufen**, damit **ich überblicke, was ich bereits gekauft habe**.
 
 **Rezept-Umsetzung:**
+
 - Als **ablenkungsfähiger Koch**, möchte ich **Schritt-für-Schritt durch ein Rezept geführt werden**, damit **ich den aktuellen Fortschritt nicht verliere**.
 - Als **erfahrener Koch**, möchte ich **alle Zutaten und Schritte auf einen Blick sehen**, damit **ich schnell kochen kann**.
 
 **Rezept-Bearbeitung:**
+
 - Als **Experimentierfreudiger**, möchte ich **meine Rezepte ändern und anpassen können**, damit **ich meine persönlichen Variationen speichern kann**.
 - Als **Nutzer**, möchte ich **Rezepte löschen können**, damit **meine Sammlung nicht mit überflüssigen Rezepten vollläuft**.
 
+**AI-basierte Aufnahme (OPTIONAL):** ⚙️
+
+- Als **schnelle Nutzerin**, möchte ich **ein Rezept per Link (Blog/Video) hinzufügen können**, damit **ich Rezepte aus dem Web ohne manuellen Aufwand in meine Sammlung übernehme**.
+- Als **fotofreundlicher Nutzer**, möchte ich **ein gedrucktes Rezept per Foto hinzufügen können**, damit **ich schnell physische Rezepte digitalisiere**.
+- Als **datenschutzbewusster Nutzer**, möchte ich **dass die AI lokal auf dem Gerät läuft**, damit **keine Rezeptdaten das Gerät verlassen und meine Daten privat bleiben**.
+
 ### Requirements
 
-| ID | Name | Priorität | Beschreibung | Use Case |
-|---|---|---|---|---|
-| REQ-001 | Rezept erstellen | MUST | Benutzer kann ein neues Rezept mit Titel, Zutaten und Kochschritten erstellen und speichern | UC1 |
-| REQ-002 | Rezepte anzeigen | MUST | Benutzer kann alle gespeicherten Rezepte in einer Liste anschauen | UC2 |
-| REQ-003 | Rezept anschauen | MUST | Benutzer kann ein einzelnes Rezept mit allen Details (Titel, Zutaten, Schritte) öffnen und ansehen | UC2 |
-| REQ-004 | Rezept bearbeiten | MUST | Benutzer kann ein gespeichertes Rezept bearbeiten und die Änderungen speichern | UC3 |
-| REQ-005 | Rezept löschen | MUST | Benutzer kann ein Rezept mit Bestätigungsdialog löschen | UC4 |
-| REQ-006 | Rezept zur Planung markieren | MUST | Benutzer kann ein Rezept mit einem Stern-Button als "geplant" markieren | UC5 |
-| REQ-007 | Geplante Rezepte filtern | MUST | Benutzer kann auf der "Planned"-Seite alle markierten Rezepte anschauen | UC6 |
-| REQ-008 | Einkaufsliste generieren | SHOULD | System aggregiert automatisch Zutaten aus allen geplanten Rezepten | UC7 |
-| REQ-009 | Zutaten abhaken | SHOULD | Benutzer kann Zutaten in der Einkaufsliste abhaken als erledigt | UC7 |
-| REQ-010 | Schritt-für-Schritt Anleitung | SHOULD | Benutzer kann ein Rezept mit Navigation durch einzelne Kochschritte kochen | UC8 |
-| REQ-011 | Lokale Persistierung | MUST | Alle Rezepte werden lokal auf dem Gerät gespeichert und bleiben nach App-Neustart erhalten | Alle |
-| REQ-012 | Navigation zwischen Screens | MUST | Tab-basierte Navigation zwischen Rezepte, Geplant und Einkaufsliste | Alle |
-| REQ-013 | Responsive UI | MUST | Benutzeroberfläche funktioniert auf verschiedenen Gerätetypen und Bildschirmgrößen | Alle |
+| ID      | Name                              | Priorität    | Beschreibung                                                                                                                                 | Use Case |
+| ------- | --------------------------------- | ------------ | -------------------------------------------------------------------------------------------------------------------------------------------- | -------- |
+| REQ-001 | Rezept erstellen                  | MUST         | Benutzer kann ein neues Rezept mit Titel, Zutaten und Kochschritten erstellen und speichern                                                  | UC1      |
+| REQ-002 | Rezepte anzeigen                  | MUST         | Benutzer kann alle gespeicherten Rezepte in einer Liste anschauen                                                                            | UC2      |
+| REQ-003 | Rezept anschauen                  | MUST         | Benutzer kann ein einzelnes Rezept mit allen Details (Titel, Zutaten, Schritte) öffnen und ansehen                                           | UC2      |
+| REQ-004 | Rezept bearbeiten                 | MUST         | Benutzer kann ein gespeichertes Rezept bearbeiten und die Änderungen speichern                                                               | UC3      |
+| REQ-005 | Rezept löschen                    | MUST         | Benutzer kann ein Rezept mit Bestätigungsdialog löschen                                                                                      | UC4      |
+| REQ-006 | Rezept zur Planung markieren      | MUST         | Benutzer kann ein Rezept mit einem Stern-Button als "geplant" markieren                                                                      | UC5      |
+| REQ-007 | Geplante Rezepte filtern          | MUST         | Benutzer kann auf der "Planned"-Seite alle markierten Rezepte anschauen                                                                      | UC6      |
+| REQ-008 | Einkaufsliste generieren          | CAN          | System aggregiert automatisch Zutaten aus allen geplanten Rezepten                                                                           | UC7      |
+| REQ-009 | Zutaten abhaken                   | CAN          | Benutzer kann Zutaten in der Einkaufsliste abhaken als erledigt                                                                              | UC7      |
+| REQ-010 | Schritt-für-Schritt Anleitung     | CAN          | Benutzer kann ein Rezept mit Navigation durch einzelne Kochschritte kochen                                                                   | UC8      |
+| REQ-011 | Lokale Persistierung              | MUST         | Alle Rezepte werden lokal auf dem Gerät gespeichert und bleiben nach App-Neustart erhalten                                                   | Alle     |
+| REQ-012 | Navigation zwischen Screens       | MUST         | Tab-basierte Navigation zwischen Rezepte, Geplant und Einkaufsliste                                                                          | Alle     |
+| REQ-013 | Responsive UI                     | MUST         | Benutzeroberfläche funktioniert auf verschiedenen Gerätetypen und Bildschirmgrößen                                                           | Alle     |
+| REQ-014 | AI-Rezeptimport (Link/Text/Video) | CAN/OPTIONAL | Lokale KI extrahiert Titel, Zutaten und Schritte aus Webseiten oder Video-Transkripten; Nutzer bestätigt erkannte Felder vor dem Speichern   | UC9      |
+| REQ-015 | AI-Rezeptimport (Bild/OCR)        | CAN/OPTIONAL | Lokale KI führt OCR und semantische Zuordnung auf Fotos/Frames aus, erkennt Zutaten, Mengen und Schritte; Nutzer bestätigt vor dem Speichern | UC10     |
 
 ## 3. Umsetzung / Implementierung
 
@@ -194,10 +222,12 @@ Diese Schicht ist verantwortlich für die Speicherung und das Abrufen von Daten 
 Dies ist das Herzstück der Anwendung. Der `useRecipes`-Hook verwaltet den gesamten Anwendungszustand und orchestriert die Kommunikation zwischen der UI und der Persistierungs-Schicht.
 
 **State-Variablen:**
+
 - `recipes`: Array aller Rezepte
 - `isLoading`: Boolean für Lade-Status
 
 **Kern-Funktionen:**
+
 - **`addRecipe(title, ingredients, steps)`:** Erstellt ein neues Rezept mit eindeutiger ID und speichert es
 - **`updateRecipe(updatedRecipe)`:** Aktualisiert ein vorhandenes Rezept und persistiert die Änderung
 - **`removeRecipe(id)`:** Löscht ein Rezept aus dem lokalen Speicher
@@ -205,7 +235,8 @@ Dies ist das Herzstück der Anwendung. Der `useRecipes`-Hook verwaltet den gesam
 - **`reloadRecipes()`:** Aktualisiert den lokalen Zustand aus dem persistenten Speicher
 - **`loadRecipes()`:** Initial-Load beim App-Start über useEffect
 
-**Datenfluss:** 
+**Datenfluss:**
+
 1. Hook wird in React-Komponenten verwendet
 2. UI ruft Hook-Methoden auf
 3. Hook verwaltet lokalen State (React useState)
@@ -251,6 +282,10 @@ Diese Schicht besteht aus React Native-Komponenten und Screens, die die Benutzer
 - **[components/Button.tsx](components/Button.tsx):** Wieder­verwendbare Button-Komponente mit Styling
 - **[components/tabs.tsx](components/tabs.tsx):** Tab-Navigation zwischen Rezepte, Geplant und Einkaufsliste
 - **[components/shopping_list_item.tsx](components/shopping_list_item.tsx):** Komponente zur Anzeige einzelner Zutaten mit Check-Box
+- **[components/RecipeFormModal.tsx](components/RecipeFormModal.tsx):** Wiederverwendbares Modal-Formular zum Erstellen und Bearbeiten von Rezepten
+- **[components/RecipeCard.tsx](components/RecipeCard.tsx):** Wiederverwendbare Karte für die Anzeige von Rezepten in Listen
+- **[components/FloatingAddButton.tsx](components/FloatingAddButton.tsx):** Wiederverwendbarer Floating-Action-Button (z. B. für Neues Rezept)
+- **[components/confirm.ts](components/confirm.ts):** Utility `showConfirm` für Bestätigungsdialoge (Promise-basiert)
 
 ### Kommunikationsflüsse zwischen Schichten
 
@@ -304,10 +339,11 @@ Data Access (recipeStorage.ts)
 **1. Custom React Hook Pattern:** `useRecipes` kapselt die gesamte Geschäftslogik und macht sie wiederverwendbar. Dies ist eine bewährte Praktik in der modernen React-Entwicklung.
 
 **2. Separation of Concerns:** Jede Schicht hat eine klare Verantwortung:
-   - Modelle definieren Datenstrukturen
-   - Data Access kümmert sich um Persistierung
-   - Hooks verwalten Zustand und Logik
-   - UI konzentriert sich auf Darstellung
+
+- Modelle definieren Datenstrukturen
+- Data Access kümmert sich um Persistierung
+- Hooks verwalten Zustand und Logik
+- UI konzentriert sich auf Darstellung
 
 **3. Async/Await Pattern:** Alle I/O-Operationen (AsyncStorage) verwenden moderne async/await-Syntax für bessere Lesbarkeit.
 
@@ -326,4 +362,3 @@ Die Anwendung nutzt **Expo Router** mit dem folgenden Struktur:
 - `/recipe/[id]/steps` - Schritt-für-Schritt Anleitung
 
 Die Tab-Navigation wird durch die `Tabs`-Komponente bereitgestellt und ermöglicht einfaches Navigieren zwischen den Hauptseiten.
-
