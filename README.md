@@ -2,6 +2,22 @@
 
 _Chef's Note_ ist eine mobile Anwendung, die Nutzende bei der einfachen Planung und Organisation von Mahlzeiten unterstützt.
 
+## Inhaltsverzeichnis
+
+- [1. Einleitung](#1-einleitung)
+  - [Motivation und Zielsetzung](#motivation-und-zielsetzung)
+- [2. Grundlagen](#2-grundlagen)
+  - [Detaillierte Problemstellung](#detaillierte-problemstellung)
+  - [Technologieauswahl (mit Begründung)](#technologieauswahl-mit-begründung)
+  - [Use Cases](#use-cases)
+- [3. Umsetzung / Implementierung](#3-umsetzung--implementierung)
+  - [Architektur-Überblick](#architektur-überblick)
+- [4. Qualitätssicherung und Deployment](#4-qualitätssicherung-und-deployment)
+  - [Qualitätssicherung](#qualitätssicherung)
+  - [Deployment](#deployment)
+- [5. Fazit](#5-fazit)
+- [Anhang: Entwicklungsumgebung und Projektstart](#anhang-entwicklungsumgebung-und-projektstart)
+
 ## 1. Einleitung
 
 ### Motivation und Zielsetzung
@@ -386,3 +402,161 @@ Die Anwendung nutzt **Expo Router** mit dem folgenden Struktur:
 - `/recipe/[id]/steps` - Schritt-für-Schritt Anleitung
 
 Die Tab-Navigation wird durch die `Tabs`-Komponente bereitgestellt und ermöglicht einfaches Navigieren zwischen den Hauptseiten.
+
+## 4. Qualitätssicherung und Deployment
+
+### Qualitätssicherung
+
+**Aktuelle Phase - Endnutzertests:**
+
+In der aktuellen Entwicklungsphase wird die Anwendung durch systematische Endnutzertests validiert. Dies umfasst:
+
+- Manuelle Tests der Core-Funktionalität (Rezepte erstellen, bearbeiten, löschen, planen)
+- Tests der Navigation und UI-Responsivität auf verschiedenen Android-Geräten
+- Validierung der lokalen Persistierung (AsyncStorage) nach App-Neustarts
+- Überprüfung der Einkaufslisten-Generierung und Ingredient-Aggregation
+
+Endnutzertests ermöglichen schnelles Feedback und iterative Verbesserungen während der aktiven Entwicklung.
+
+**Zukünftige Phase - Unit-Tests mit Jest:**
+
+Zum Sicherstellen der langfristigen Code-Qualität und zur Vermeidung von Regressions sind folgende Unit-Test-Implementierungen geplant:
+
+- **Hook-Tests:** Unit-Tests für `useRecipes` Hook zur Validierung von CRUD-Operationen (Create, Read, Update, Delete)
+- **Storage-Tests:** Tests für die `recipeStorage` Persistierungs-Schicht
+- **Utility-Tests:** Tests für Hilfsfunktionen (z. B. Ingredient-Aggregation, Validation-Logik)
+- **Component-Tests:** Jest-Snapshots und Rendering-Tests für kritische UI-Komponenten
+- **Integration-Tests:** Tests der Workflow-Abläufe (z. B. Rezept erstellen → planen → Einkaufsliste)
+
+Jest wird als Test-Runner konfiguriert und in die CI/CD-Pipeline integriert, um Qualität zu sichern.
+
+**Was ist Jest?**
+
+Jest ist ein modernes JavaScript-Test-Framework, entwickelt von Facebook und optimiert für React-Projekte und React Native Anwendungen. Jest bietet:
+
+- **Einfache Syntax:** Intuitive und leicht verständliche Test-Syntax mit `describe()` und `it()`-Blöcken
+- **Built-in Assertions:** Umfangreiche Assertions und Matchers ohne zusätzliche Bibliotheken
+- **Snapshot Testing:** Automatische Erfassung und Vergleich von UI-Snapshots zur Erkennung unerwarteter Änderungen
+- **Mocking & Spies:** Einfaches Mocking von Funktionen, Module und externe Abhängigkeiten
+- **Coverage Reports:** Automatische Generierung von Code-Coverage-Reports zur Messung der Test-Abdeckung
+- **Parallelisierung:** Tests laufen parallel für schnellere Ausführung
+- **Watch Mode:** Automatische Neu-Ausführung von Tests bei Dateiänderungen während der Entwicklung
+
+Im Kontext von Chef's Note wird Jest verwendet, um sicherzustellen, dass die Geschäftslogik (Hooks, Storage-Layer) zuverlässig funktioniert und Code-Änderungen keine unerwarteten Seiteneffekte verursachen.
+
+### Deployment
+
+**Aktuelle Phase - Lokale Android APK:**
+
+Die Anwendung wird aktuell als lokale Android APK (Android Package) gebaut und auf Android-Geräten oder Emulatoren installiert:
+
+1. **Build-Prozess:** Über `expo build:android` oder Gradle wird die APK aus dem React Native/Expo-Projekt kompiliert
+2. **Signierung:** Die APK wird mit einem Entwickler-Zertifikat signiert
+3. **Installation:** Installation auf physischen Android-Geräten via USB oder auf dem Android-Emulator
+4. **Testing:** Endnutzer und Tester installieren und prüfen die lokale APK
+5. **Iteration:** Bei Fehlern oder Verbesserungen wird eine neue APK gebaut und neu installiert
+
+Dieser Ansatz ermöglicht schnelle lokale Tests und Validierung während der Entwicklung.
+
+**Zukünftige Phase - App-Store Deployment:**
+
+Zum breiten Rollout der Anwendung ist Deployment über offizielle App-Stores geplant:
+
+- **Google Play Store:** Verteilung der APK über den offiziellen Android App Store mit Freigabeprozess und Versionsverwaltung
+- **Apple App Store (optional):** Deployment von iOS-Builds (via TestFlight und App Store) sobald iOS-Support geplant ist
+- **Release-Management:** Versionierung, Release Notes und Rollout-Strategien (z. B. Staged Rollout)
+- **Automatisierte Builds:** CI/CD-Integration (z. B. via EAS Build oder GitHub Actions) für automatisierte, sichere Production-Builds
+- **Code-Signierung:** Produktiv-Zertifikate und sichere Key-Verwaltung für App-Store Signaturen
+
+App-Store Deployment ermöglicht direkte Installation durch Endnutzer ohne technische Barrieren und bietet automatische Updates, Nutzerfeedback und offizielle Distribution.
+
+## 5. Fazit
+
+Die Entwicklung von _Chef's Note_ mit React Native und Expo hat gezeigt, dass die Erstellung von mobilen Anwendungen zwar auf vertrauten Webtechnologien aufbaut, aber dennoch eigenständige Herausforderungen mit sich bringt. Ein zentraler Unterschied zur Web-Entwicklung liegt in der Navigation und dem UI-Stack-Konzept: Anders als in Web-Anwendungen, wo das Browser-Routing und das DOM-Modell zentral sind, erfordert React Native die Verwendung von Stack Navigationssystemen und native Komponenten. Diese neuen Konzepte (wie Expo Router, React Navigation, native StyleSheet API) erforderten Lernaufwand und verzögerten zunächst die Entwicklung, da Team-Mitglieder ihre mentalen Modelle anpassen mussten.
+
+Glücklicherweise bot React und TypeScript eine vertraute Grundlage, die den Übergang erleichterte. Die Geschäftslogik der Anwendung konnte nahezu identisch wie in Web-Projekten implementiert werden: React Hooks für State Management, TypeScript für Typ-Sicherheit und die intuitiven React-Komponenten-Patterns waren unmittelbar übertragbar. Das CSS-ähnliche Styling via React Native StyleSheet fühlte sich natürlich an und ermöglichte schnelle UI-Entwicklung ohne komplexe Native-Code-Ausflüge.
+
+Insgesamt erwies sich dieses Projekt als ausgezeichneter Einstiegspunkt in die native mobile Entwicklung. Die Kombination aus vertrauten Webentwicklungs-Konzepten und neuen, fokussierten mobile-spezifischen Patterns bietet eine sanfte Lernkurve für Web-Entwickler. Mit der gewonnenen Erfahrung und dem durchgearbeiteten Projekt können zukünftige mobile Funktionen schneller und effizienter umgesetzt werden.
+
+## Anhang: Entwicklungsumgebung und Projektstart
+
+Dieser Anhang beschreibt, wie das _Chef's Note_ Expo-Projekt in verschiedenen Umgebungen gestartet wird.
+
+### Voraussetzungen
+
+Bevor Sie das Projekt starten, stellen Sie sicher, dass folgende Software installiert ist:
+
+- **Node.js** (empfohlen: Version 18 oder höher)
+- **npm** oder **yarn** (üblicherweise mit Node.js installiert)
+- **Expo CLI:** Installation über `npm install -g expo-cli`
+
+### 1. Projekt initialisieren
+
+Führen Sie im Projektverzeichnis folgende Befehle aus:
+
+```bash
+# Abhängigkeiten installieren
+npm install
+# oder
+yarn install
+
+# Expo-Projekt starten
+npm start
+# oder
+yarn start
+```
+
+Nach dem Start zeigt Expo ein Menü mit verschiedenen Optionen an.
+
+### 2. Android-Emulator
+
+**Voraussetzungen:**
+- Android Studio installiert
+- Android Virtual Device (AVD) erstellt und konfiguriert
+
+**Projektstart:**
+
+```bash
+npm start
+```
+
+Im Expo-Menü:
+- Drücke `a` um die App im Android-Emulator zu starten
+- Alternativ: Stellen Sie sicher, dass der Android-Emulator läuft, und Expo verbindet sich automatisch
+
+Die App wird kompiliert und auf dem emulierten Android-Gerät installiert und gestartet.
+
+### 3. iOS-Simulator (macOS erforderlich)
+
+**Voraussetzungen:**
+- macOS mit Xcode installiert
+- iOS Simulator verfügbar (über Xcode Command Line Tools)
+
+**Projektstart:**
+
+```bash
+npm start
+```
+
+Im Expo-Menü:
+- Drücke `i` um die App im iOS-Simulator zu starten
+- Alternativ: Stellen Sie sicher, dass ein iOS-Simulator läuft, und Expo verbindet sich automatisch
+
+Die App wird kompiliert und im iOS-Simulator gestartet. Der Simulator öffnet sich automatisch, wenn er nicht bereits läuft.
+
+### 4. Web-Browser
+
+**Voraussetzungen:**
+- Kein zusätzliches Setup erforderlich
+
+**Projektstart:**
+
+```bash
+npm start
+```
+
+Im Expo-Menü:
+- Drücke `w` um die App im Standard-Web-Browser zu starten
+- Alternativ: Öffnen Sie manuell die angezeigte Adresse im Browser
+
+Die App läuft dann im Web-Browser als React Web-Anwendung. Beachten Sie, dass einige mobile-spezifische Features (z. B. native Android/iOS APIs) im Web eingeschränkt sein können.
