@@ -22,10 +22,8 @@ _Chef's Note_ ist eine mobile Anwendung, die Nutzende bei der einfachen Planung 
 
 ### Motivation und Zielsetzung
 
-**Motivation:**
 Im Alltag vieler Menschen entsteht eine zentrale Herausforderung: die Planung von abwechslungsreichen und ausgewogenen Mahlzeiten. Mit der Zeit sammeln sich zahlreiche Rezepte aus verschiedensten Quellen an – handschriftliche Notizen, Kochbücher, Webseiten oder soziale Medien – die verstreut und unorganisiert sind. Dies führt zu Überforderung, kostet unnötig Zeit und verstärkt die Tendenz, immer wieder zu denselben Gerichten zu greifen. Das Resultat ist häufig eine unausgewogene Ernährung und der Verlust kulinarischer Vielfalt.
 
-**Zielsetzung:**
 _Chef's Note_ adressiert dieses Problem durch eine zentrale, intuitive Plattform zur Rezeptverwaltung. Die Anwendung ermöglicht es Nutzenden, ihre Rezepte schnell zu sammeln, übersichtlich zu organisieren und intelligent zu planen. Darüber hinaus unterstützt _Chef's Note_ durch automatisierte Funktionen bei der Mahlzeitenplanung und der Erstellung von Einkaufslisten, um den gesamten Workflow vom Rezeptgedanken bis zur Umsetzung in der Küche zu optimieren.
 
 ## 2. Grundlagen
@@ -101,29 +99,29 @@ Die Anwendung richtet sich an Privatpersonen, die ihre Mahlzeitenplanung optimie
    - Wird zu Schritt-für-Schritt Seite navigiert
    - Kann mit "Next Step" / "Previous Step" Buttons navigieren
 
-9. **AI-basierter Rezeptimport (Link / Text / Video) (OPTIONAL)** 🔧
+9. **AI-basierter Rezeptimport (Link / Text / Video)**
    - Benutzer fügt einen Link zu einem Rezept oder Video ein (z. B. Blog, Webseite, YouTube)
    - Lokale AI analysiert die Zielseite bzw. Transkription, extrahiert Titel, Zutaten und Schritte
    - Eine Vorschau des erkannten Rezepts wird angezeigt; Benutzer bestätigt oder bearbeitet die Felder
    - Bestätigtes Rezept wird lokal gespeichert (siehe Anforderungen zur lokalen KI-Privacy)
 
-10. **AI-basierter Rezeptimport (Bild / Foto) (OPTIONAL)** 🔧
+10. **AI-basierter Rezeptimport (Bild / Foto)**
    - Benutzer macht ein Foto eines gedruckten Rezepts oder eines Bildschirms / pausiert ein Video-Frame
    - Lokale AI führt OCR und semantische Zuordnung durch, erkennt Zutaten, Mengenangaben und Schritte
    - App zeigt erkannte Felder zur Bestätigung/Bearbeitung an
    - Bestätigtes Rezept wird lokal gespeichert
 
-11. **Lokalisierung / Übersetzung (OPTIONAL)** 🌐
+11. **Lokalisierung / Übersetzung**
    - Benutzer wählt eine bevorzugte Sprache in den Einstellungen oder die App detektiert Sprache automatisch
    - UI-Strings sind übersetzbar; importierte Rezepte können lokal in die Nutzersprache übersetzt werden
    - Nutzer kann erkannte Übersetzungen prüfen und manuell anpassen, bevor gespeichert wird
 
-12. **Daten-Import / Export (OPTIONAL)** ⤴️⤵️
+12. **Daten-Import / Export** 
    - Benutzer exportiert Rezepte als JSON/CSV oder importiert Rezepte/Backups aus anderen Quellen
    - Import zeigt Vorschau mit Feldzuordnung (z. B. Zutaten, Mengen, Schritte) und verlangt Nutzerbestätigung
    - Import/Export kann lokal erfolgen; optionale Ergänzung durch Cloud-Import ist möglich (siehe UC13)
 
-13. **Cloud-Speicher & Nutzerprofil (OPTIONAL)** ☁️
+13. **Cloud-Speicher & Nutzerprofil**
    - Nutzer kann ein Konto anlegen und Rezepte in der Cloud synchronisieren (Backup & Sync)
    - Synchronisierung ist optional; lokale-only Modus bleibt Standard
    - Datenschutz: Nutzer entscheidet, ob Daten cloudgespeichert werden; sichere Authentifizierung und optionale Verschlüsselung empfohlen
@@ -155,13 +153,13 @@ Die Anwendung richtet sich an Privatpersonen, die ihre Mahlzeitenplanung optimie
 - Als **Experimentierfreudiger**, möchte ich **meine Rezepte ändern und anpassen können**, damit **ich meine persönlichen Variationen speichern kann**.
 - Als **Nutzer**, möchte ich **Rezepte löschen können**, damit **meine Sammlung nicht mit überflüssigen Rezepten vollläuft**.
 
-**AI-basierte Aufnahme (OPTIONAL):** ⚙️
+**AI-basierte Aufnahme:**
 
 - Als **schnelle Nutzerin**, möchte ich **ein Rezept per Link (Blog/Video) hinzufügen können**, damit **ich Rezepte aus dem Web ohne manuellen Aufwand in meine Sammlung übernehme**.
 - Als **fotofreundlicher Nutzer**, möchte ich **ein gedrucktes Rezept per Foto hinzufügen können**, damit **ich schnell physische Rezepte digitalisiere**.
 - Als **datenschutzbewusster Nutzer**, möchte ich **dass die AI lokal auf dem Gerät läuft**, damit **keine Rezeptdaten das Gerät verlassen und meine Daten privat bleiben**.
 
-**Optionale Funktionen (OPTIONAL):** 💡
+**Optionale Funktionen:**
 
 - Als **internationaler Nutzer**, möchte ich **die App in meiner Sprache nutzen können**, damit **ich UI-Elemente und Rezeptinhalte besser verstehe**. (Lokalisierung / Übersetzung)
 - Als **Backup-orientierter Nutzer**, möchte ich **meine Rezepte exportieren und importieren können**, damit **ich Backups erstelle oder Rezepte zwischen Geräten und Apps übertrage**. (Daten-Import / Export)
