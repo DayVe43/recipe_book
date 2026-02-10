@@ -22,9 +22,9 @@ _Chef's Note_ ist eine mobile Anwendung, die Nutzende bei der einfachen Planung 
 
 ### Motivation und Zielsetzung
 
-Im Alltag vieler Menschen entsteht eine zentrale Herausforderung: die Planung von abwechslungsreichen und ausgewogenen Mahlzeiten. Mit der Zeit sammeln sich zahlreiche Rezepte aus verschiedensten Quellen an – handschriftliche Notizen, Kochbücher, Webseiten oder soziale Medien – die verstreut und unorganisiert sind. Dies führt zu Überforderung, kostet unnötig Zeit und verstärkt die Tendenz, immer wieder zu denselben Gerichten zu greifen. Das Resultat ist häufig eine unausgewogene Ernährung und der Verlust kulinarischer Vielfalt.
+Im Alltag vieler Menschen entsteht eine zentrale Herausforderung: die Planung von abwechslungsreichen und ausgewogenen Mahlzeiten. Mit der Zeit sammeln sich zahlreiche Rezepte aus verschiedensten Quellen, wie beispielsweise handschriftliche Notizen, Kochbücher, Webseiten oder soziale Medien, die verstreut und unorganisiert sind. Dies führt zu Überforderung, kostet unnötig Zeit und verstärkt die Tendenz, immer wieder zu denselben Gerichten zu greifen. Das Resultat ist häufig eine unausgewogene Ernährung und der Verlust kulinarischer Vielfalt.
 
-_Chef's Note_ adressiert dieses Problem durch eine zentrale, intuitive Plattform zur Rezeptverwaltung. Die Anwendung ermöglicht es Nutzenden, ihre Rezepte schnell zu sammeln, übersichtlich zu organisieren und intelligent zu planen. Darüber hinaus unterstützt _Chef's Note_ durch automatisierte Funktionen bei der Mahlzeitenplanung und der Erstellung von Einkaufslisten, um den gesamten Workflow vom Rezeptgedanken bis zur Umsetzung in der Küche zu optimieren.
+_Chef's Note_ adressiert dieses Problem durch eine zentrale, intuitive Plattform zur Rezeptverwaltung. Die Anwendung ermöglicht es Nutzenden, ihre Rezepte schnell zu sammeln, übersichtlich zu organisieren und intelligent zu planen. Darüber hinaus unterstützt _Chef's Note_ durch automatisierte Funktionen bei der Mahlzeitenplanung und der Erstellung von Einkaufslisten, um den gesamten Workflow vom Rezeptgedanken bis zur Umsetzung in der Küche zu vereinfachen.
 
 ## 2. Grundlagen
 
@@ -32,9 +32,9 @@ _Chef's Note_ adressiert dieses Problem durch eine zentrale, intuitive Plattform
 
 **Zentrale Herausforderungen:**
 
-1. **Fragmentierte Rezeptquellen:** Nutzer sammeln Rezepte aus diversen Quellen (Papier, eBooks, Websites, Social Media), was zu einer unorganisierten und schwer zugänglichen Rezeptsammlung führt. Es gibt kein zentrales System zur Verwaltung und schnellen Auffindung.
+1. **Fragmentierte Rezeptquellen:** Nutzer sammeln Rezepte aus diversen Quellen (physische Notizen, Bücher, eBooks, Websites, Social Media), was zu einer unorganisierten und schwer zugänglichen Rezeptsammlung führt. Es gibt kein zentrales System zur Verwaltung und schnellen Auffindung von Rezepten.
 
-2. **Zeitaufwendige Mahlzeitenplanung:** Die manuelle Planung von Mahlzeiten für mehrere Tage ist zeitintensiv und fehleranfällig. Nutzer müssen manuell überprüfen, welche Zutaten verfügbar sind und welche besorgt werden müssen.
+2. **Zeitaufwendige Mahlzeitenplanung:** Die manuelle Planung von Mahlzeiten für mehrere Tage ist zeitintensiv, da Rezepte an unterschiedlichen Stellen liegen. Nutzer müssen manuell überprüfen, welche Zutaten verfügbar sind und welche besorgt werden müssen. Die Erstellung einer entsprechenden Einkaufsliste wird dadurch Fehleranfällig und Zeitaufwändig.
 
 3. **Ineffiziente Einkaufsvorbereitung:** Das Erstellen von Einkaufslisten basierend auf geplanten Rezepten ist mühsam. Zutaten werden mehrfach notiert, Mengen werden nicht aggregiert und es entsteht eine unübersichtliche Liste.
 
@@ -99,32 +99,32 @@ Die Anwendung richtet sich an Privatpersonen, die ihre Mahlzeitenplanung optimie
    - Wird zu Schritt-für-Schritt Seite navigiert
    - Kann mit "Next Step" / "Previous Step" Buttons navigieren
 
-9. **AI-basierter Rezeptimport (Link / Text / Video)**
+9. **KI-basierter Rezeptimport (Link / Text / Video)**
    - Benutzer fügt einen Link zu einem Rezept oder Video ein (z. B. Blog, Webseite, YouTube)
-   - Lokale AI analysiert die Zielseite bzw. Transkription, extrahiert Titel, Zutaten und Schritte
+   - Lokale KI analysiert die Zielseite bzw. Transkription, extrahiert Titel, Zutaten und Schritte
    - Eine Vorschau des erkannten Rezepts wird angezeigt; Benutzer bestätigt oder bearbeitet die Felder
-   - Bestätigtes Rezept wird lokal gespeichert (siehe Anforderungen zur lokalen KI-Privacy)
-
-10. **AI-basierter Rezeptimport (Bild / Foto)**
-   - Benutzer macht ein Foto eines gedruckten Rezepts oder eines Bildschirms / pausiert ein Video-Frame
-   - Lokale AI führt OCR und semantische Zuordnung durch, erkennt Zutaten, Mengenangaben und Schritte
-   - App zeigt erkannte Felder zur Bestätigung/Bearbeitung an
    - Bestätigtes Rezept wird lokal gespeichert
 
+10. **KI-basierter Rezeptimport (Bild / Foto)**
+    - Benutzer macht ein Foto eines gedruckten Rezepts oder eines Bildschirms / pausiert ein Video-Frame
+    - Lokale KI führt semantische Zuordnung durch, erkennt Zutaten, Mengenangaben und Schritte
+    - App zeigt erkannte Felder zur Bestätigung/Bearbeitung an
+    - Bestätigtes Rezept wird lokal gespeichert
+
 11. **Lokalisierung / Übersetzung**
-   - Benutzer wählt eine bevorzugte Sprache in den Einstellungen oder die App detektiert Sprache automatisch
-   - UI-Strings sind übersetzbar; importierte Rezepte können lokal in die Nutzersprache übersetzt werden
-   - Nutzer kann erkannte Übersetzungen prüfen und manuell anpassen, bevor gespeichert wird
+    - Benutzer wählt eine bevorzugte Sprache in den Einstellungen oder die App detektiert Sprache automatisch
+    - UI-Strings sind übersetzbar; importierte Rezepte können lokal in die Nutzersprache übersetzt werden
+    - Nutzer kann erkannte Übersetzungen prüfen und manuell anpassen, bevor gespeichert wird
 
 12. **Daten-Import / Export** 
-   - Benutzer exportiert Rezepte als JSON/CSV oder importiert Rezepte/Backups aus anderen Quellen
-   - Import zeigt Vorschau mit Feldzuordnung (z. B. Zutaten, Mengen, Schritte) und verlangt Nutzerbestätigung
-   - Import/Export kann lokal erfolgen; optionale Ergänzung durch Cloud-Import ist möglich (siehe UC13)
+    - Benutzer exportiert Rezepte als JSON/CSV oder importiert Rezepte/Backups aus anderen Quellen
+    - Import zeigt Vorschau mit Feldzuordnung (z. B. Zutaten, Mengen, Schritte) und verlangt Nutzerbestätigung
+    - Import/Export kann lokal erfolgen; optionale Ergänzung durch Cloud-Import ist möglich
 
 13. **Cloud-Speicher & Nutzerprofil**
-   - Nutzer kann ein Konto anlegen und Rezepte in der Cloud synchronisieren (Backup & Sync)
-   - Synchronisierung ist optional; lokale-only Modus bleibt Standard
-   - Datenschutz: Nutzer entscheidet, ob Daten cloudgespeichert werden; sichere Authentifizierung und optionale Verschlüsselung empfohlen
+    - Nutzer kann ein Konto anlegen und Rezepte in der Cloud synchronisieren (Backup & Sync)
+    - Synchronisierung ist optional; lokale-only Modus bleibt Standard
+    - Datenschutz: Nutzer entscheidet, ob Daten cloudgespeichert werden; sichere Authentifizierung und Verschlüsselung
 
 ### User Stories
 
@@ -285,7 +285,7 @@ Dies ist das Herzstück der Anwendung. Der `useRecipes`-Hook verwaltet den gesam
 
 Diese Schicht besteht aus React Native-Komponenten und Screens, die die Benutzeroberfläche darstellen.
 
-**Haupty-Screens:**
+**Haupt-Screens:**
 
 - **[app/index.tsx](app/index.tsx) - Rezeptliste:**
   - Zeigt alle Rezepte in einer FlatList
